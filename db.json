@@ -1,0 +1,80 @@
+{
+  "feeds": [
+    {
+      "id": 1,
+      "creator_user_id": 1,
+      "text": "One amazing post 1",
+      "created_date": 1595986659005,
+      "updated_date": 1595986659005,
+      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "parent_feed_id": null,
+      "reactions": []
+    },
+    {
+      "id": 2,
+      "creator_user_id": 1,
+      "text": "One amazing post 2",
+      "created_date": 1595986776408,
+      "updated_date": 1595986776408,
+      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "parent_feed_id": null,
+      "reactions": []
+    },
+    {
+      "id": 3,
+      "creator_user_id": 2,
+      "text": "One amazing post 3",
+      "created_date": 1595986794015,
+      "updated_date": 1595986794015,
+      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "parent_feed_id": null,
+      "reactions": []
+    },
+    {
+      "id": 4,
+      "creator_user_id": 2,
+      "text": "A feed comments by one user",
+      "created_date": 1595986996550,
+      "updated_date": 1595986996550,
+      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "parent_feed_id": 3,
+      "reactions": [{
+        "reaction_type": "like",
+        "user_id": 2
+      }]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "photo_url": "https://picsum.photos/200/200?grayscale",
+      "name": "Rudiney",
+      "last_name": "Mejias",
+      "email": "rudymejias@gmail.com"
+    },
+    {
+      "id": 2,
+      "photo_url": "https://picsum.photos/200/200?grayscale",
+      "name": "Yuleisy",
+      "last_name": "Vega",
+      "email": "jules@gmail.com"
+    },
+    {
+      "id": 3,
+      "photo_url": "https://picsum.photos/200/200?grayscale",
+      "name": "Mario",
+      "last_name": "Jimenez",
+      "email": "mario@gmail.com"
+    }
+  ],
+  "login": {
+    "user": {
+      "id": 1,
+      "photo_url": "https://picsum.photos/200/200?grayscale",
+      "name": "Rudiney",
+      "last_name": "Mejias",
+      "email": "rudymejias@gmail.com"
+    },
+    "access_token": "312eddad1rrfe.dsad32gf4r4f.dsadsqd32d32"
+  }
+}

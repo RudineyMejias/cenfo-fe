@@ -1,0 +1,10 @@
+<div class="mb-4 cf-input__wrapper">
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    class="form-control cf-input"
+    (input)="onInput($event.target.value)" />
+  <div *ngIf="displayErrorMsg" class="invalid-feedback">
+    {{errorMsg}}
+  </div>
+</div>

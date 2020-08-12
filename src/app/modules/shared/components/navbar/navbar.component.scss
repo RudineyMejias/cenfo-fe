@@ -1,0 +1,23 @@
+@import 'src/styles/colors';
+
+.cf-navbar {
+  height: 70px;
+  position: relative;
+  box-shadow: 0 0 8px 1px rgba($color-black, .2);
+
+  &:after {
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    z-index: -1;
+    content: 'It helps you to connect and share with the people in your life';
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: $color-punch;
+  }
+}

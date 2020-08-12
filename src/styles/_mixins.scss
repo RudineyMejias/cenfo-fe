@@ -1,0 +1,15 @@
+@mixin overlap-elements($overlap-pixels) {
+  $number-of-elements: 20;
+
+  @for $i from 0 through $number-of-elements {
+    &[data-number-elements='#{$i}'] {
+      margin-right: ($i - 1) * $overlap-pixels;
+    }
+
+    & > *:nth-child(#{$number-of-elements - $i}) {
+      position: relative;
+      z-index: $number-of-elements - $i;
+      left: ($number-of-elements - $i - 1) * $overlap-pixels;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<h2 class="signup-form__title">Create An Account</h2>
+<div class="jumbotron signup-form__card">
+  <h4 class="signup-form__card-header">Welcome to our world</h4>
+  <div class="signup-form__card-content">
+    <form [formGroup]="formGroup">
+      <cf-input placeholder="Email" type="email" formControlName="email"></cf-input>
+      <cf-input placeholder="First Name" type="text" formControlName="name"></cf-input>
+      <cf-input placeholder="Last Name" type="text" formControlName="lastName"></cf-input>
+      <cf-input type="password" placeholder="Password" formControlName="password"></cf-input>
+      <cf-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></cf-input>
+      <button (click)="onSubmit()" class="btn btn-danger btn-block signup-form__submit" >Create Account</button>
+      <p class="signup-form__terms">I have read & accepted the <span>terms of use</span></p>
+    </form>
+  </div>
+</div>

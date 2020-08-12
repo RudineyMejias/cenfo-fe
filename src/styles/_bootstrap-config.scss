@@ -1,0 +1,14 @@
+@import 'src/styles/colors';
+
+$font-family-sans-serif: "AvenirNext", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif: "AvenirNext", Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$headings-font-family: "fieldwork", "AvenirNext", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$headings-font-weight: bold !default;
+
+$theme-colors: (
+  "danger": $color-punch,
+  "light": $color-white,
+);

@@ -1,0 +1,17 @@
+@import 'src/styles/colors';
+
+.profile-box {
+  &__photo {
+    width: 30%;
+    height: 30%;
+  }
+
+  &__content {
+    padding-top: 0;
+    margin-top: -15%;
+  }
+
+  &__title {
+    color: $color-black;
+  }
+}

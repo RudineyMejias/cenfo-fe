@@ -1,0 +1,31 @@
+@import './styles/vendor/bicon.min.css';
+@import 'src/styles/colors';
+@import 'src/styles/fonts';
+@import 'src/styles/bootstrap-config';
+@import '~bootstrap/scss/bootstrap';
+
+html, body {
+  height: 100%;
+  background-color: $color-seashell;
+}
+
+.jumbotron {
+  background-color: $color-white;
+  border-radius: 0;
+  box-shadow: 0px 3px 20px 0px rgba($color-black, .25);
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.invalid-feedback {
+  display: initial;
+  margin-top: 0;
+}
+
+.card { 
+  box-shadow: 0px 1px 15px 0px rgba($color-mine-shaft, .2);
+  border: 0;
+  border-radius: 0;
+}

@@ -1,0 +1,38 @@
+@import 'src/styles/colors';
+
+.signup-form {
+  &__title {
+    color: $color-punch;
+    padding-bottom: 40px;
+  }
+
+  &__card {
+    padding: 0 0 16px 0;
+    box-shadow: 0px 3px 20px 0px rgba($color-black, .25);
+
+    &-header {
+      padding: 23px 0;
+      background-color: $color-punch;
+      color: $color-white;
+    }
+
+    &-content {
+      padding: 40px 100px;
+    }
+  }
+
+  &__submit {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  &__terms {
+    padding-top: 30px;
+    font-weight: 500;
+    font-size: 1em;
+
+    & > span {
+      color: $color-punch;
+    }
+  }
+}

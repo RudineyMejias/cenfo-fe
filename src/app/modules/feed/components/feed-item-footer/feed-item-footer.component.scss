@@ -1,0 +1,34 @@
+@import 'src/styles/colors';
+@import 'src/styles/mixins';
+
+.feed-item-footer {
+  display: flex;
+  justify-content: space-between;
+
+  &__reactions {
+    @include overlap-elements(-.9em);
+    & > * {
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  &__description {
+    font-size: .6em;
+  }
+
+  &__button {
+    color: $color-mine-shaft;
+    font-size: 1.7em;
+    display: flex;
+
+    &:hover {
+      color: $color-punch;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import 'src/styles/colors';
+
+.login {
+  &__image {
+    padding: 0;
+    background: url(https://redefineschool.files.wordpress.com/2012/12/people-grid-mar-16.png?w=1500&h=900) no-repeat center center fixed; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &-overlay {
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color-punch, 0.5);
+    }
+  }
+
+  &__signup {
+    width: 90%;
+    text-align: center;
+  }
+
+  &__signin {
+    text-align: center;
+    display: flex;
+    align-items: center;
+  }
+}

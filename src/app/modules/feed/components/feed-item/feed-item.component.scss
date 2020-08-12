@@ -1,0 +1,16 @@
+@import 'src/styles/colors';
+
+.feed-item {
+  &__text {
+    font-size: .9em;
+    line-height: 2;
+  }
+
+  &__image {
+    width: 100%;
+  }
+
+  &__comments {
+    border-top: 1px solid $color-santas-gray;
+  }
+}
