@@ -6,41 +6,30 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { LocalStorageKeys } from '@/shared/constants/local-storage-keys.constant';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '@/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private isAuthenticatedSubject = new BehaviorSubject(!!localStorage.getItem(LocalStorageKeys.TOKEN));
+  private isAuthenticatedSubject = new BehaviorSubject(!!localStorage.getItem(LocalStorageKeys.AUTH));
 
   get isAuthenticated$(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
   }
 
-  constructor(
-    private readonly requestService: RequestService,
-    private readonly router: Router,
-    private readonly translateService: TranslateService
-  ) { }
+  constructor(private readonly requestService: RequestService) { }
 
   login(credentials: Credentials): Observable<void> {
-    if (credentials.email !== environment.validEmail || credentials.password !== environment.validPassword) {
-      return this.translateService.get('ERRORS.INVALID_CREDENTIALS')
-        .pipe(mergeMap((message) => throwError({ message })));
-    }
-    return this.requestService.get<{ token: string, user: User }>('/login')
+    return this.requestService.post<{ token: string, user: User }>('/login', credentials)
       .pipe(map((data) => {
-        localStorage.setItem(LocalStorageKeys.TOKEN, data.token);
-        this.router.navigateByUrl('/feed');
+        localStorage.setItem(LocalStorageKeys.AUTH, JSON.stringify(data));
+        this.isAuthenticatedSubject.next(true);
       }));
   }
 
   logout(): void {
-    localStorage.removeItem(LocalStorageKeys.TOKEN);
+    localStorage.removeItem(LocalStorageKeys.AUTH);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigateByUrl('/login');
   }
 }

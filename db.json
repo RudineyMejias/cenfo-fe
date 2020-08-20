@@ -52,7 +52,7 @@
       "photo_url": "https://picsum.photos/200/200?grayscale",
       "name": "Rudiney",
       "last_name": "Mejias",
-      "email": "rudymejias@gmail.com"
+      "email": "test@test.com"
     },
     {
       "id": 2,
@@ -68,6 +68,5 @@
       "last_name": "Jimenez",
       "email": "mario@gmail.com"
     }
-  ],
-  "login": {}
+  ]
 }

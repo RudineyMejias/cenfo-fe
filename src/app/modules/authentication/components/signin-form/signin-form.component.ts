@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../../core/services/authentication.service';
+import { AuthenticationService } from '@/core/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoadingService } from '@/core/services/loading.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cf-signin-form',
@@ -14,7 +16,9 @@ export class SigninFormComponent implements OnInit {
 
   constructor(
     private readonly authenticationService: AuthenticationService,
-    private readonly toastrService: ToastrService
+    private readonly toastrService: ToastrService,
+    private readonly loadingService: LoadingService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,11 +34,14 @@ export class SigninFormComponent implements OnInit {
       return;
     }
 
+    this.loadingService.startLoading();
     try {
       await this.authenticationService.login(this.formGroup.value).toPromise();
+      this.loadingService.stopLoading();
+      this.router.navigateByUrl('/feed');
     } catch (e) {
-      console.log(e);
-      this.toastrService.error(e?.message);
+      this.toastrService.error(e?.error?.message);
+      this.loadingService.stopLoading();
     }
   }
 }
