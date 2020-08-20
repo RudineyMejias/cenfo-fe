@@ -1,15 +1,15 @@
-<h2 class="signup-form__title">Create An Account</h2>
+<h2 class="signup-form__title">{{'AUTH.SIGNUP.TITLE' | translate}}</h2>
 <div class="jumbotron signup-form__card">
-  <h4 class="signup-form__card-header">Welcome to our world</h4>
+  <h4 class="signup-form__card-header">{{'AUTH.SIGNUP.WELCOME' | translate}}</h4>
   <div class="signup-form__card-content">
-    <form [formGroup]="formGroup">
-      <cf-input placeholder="Email" type="email" formControlName="email"></cf-input>
-      <cf-input placeholder="First Name" type="text" formControlName="name"></cf-input>
-      <cf-input placeholder="Last Name" type="text" formControlName="lastName"></cf-input>
-      <cf-input type="password" placeholder="Password" formControlName="password"></cf-input>
-      <cf-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></cf-input>
-      <button (click)="onSubmit()" class="btn btn-danger btn-block signup-form__submit" >Create Account</button>
-      <p class="signup-form__terms">I have read & accepted the <span>terms of use</span></p>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <cf-input [placeholder]="'AUTH.SIGNUP.FIRST_NAME' | translate" type="text" formControlName="name"></cf-input>
+      <cf-input [placeholder]="'AUTH.SIGNUP.LAST_NAME' | translate" type="text" formControlName="lastName"></cf-input>
+      <cf-input [placeholder]="'AUTH.SIGNUP.EMAIL' | translate" type="email" formControlName="email"></cf-input>
+      <cf-input type="password" [placeholder]="'AUTH.SIGNUP.PASSWORD' | translate" formControlName="password"></cf-input>
+      <cf-input type="password" [placeholder]="'AUTH.SIGNUP.CONFIRM_PASSWORD' | translate" formControlName="confirmPassword"></cf-input>
+      <button type="submit" class="btn btn-danger btn-block signup-form__submit" >{{'AUTH.SIGNUP.SUBMIT' | translate}}</button>
+      <p class="signup-form__terms">{{'AUTH.SIGNUP.READ' | translate}} <span>{{'AUTH.SIGNUP.TERMS' | translate}}</span></p>
     </form>
   </div>
 </div>

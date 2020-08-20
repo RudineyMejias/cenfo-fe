@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'cf-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cenfo-fe';
+
+  constructor(private ngxService: NgxUiLoaderService) {}
+
+  ngOnInit() {
+    this.ngxService.start();
+  }
 }

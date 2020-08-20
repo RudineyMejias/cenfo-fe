@@ -1,0 +1,33 @@
+{
+  "FEED": {
+    "RECENT_NOTIFICATIONS": {
+      "TITLE": "Recent Notifications"
+    }
+  },
+  "AUTH": {
+    "SIGNUP": {
+      "TITLE": "Create An Account",
+      "WELCOME": "Welcome to our world",
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Last Name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "READ": "I have read & accepted the",
+      "TERMS": "terms of use",
+      "SUBMIT": "Create Account"
+    },
+    "SIGNIN": {
+      "TITLE": "Sign In",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SUBMIT": "Sign In"
+    }
+  },
+  "ERRORS": {
+    "PASSWORD_MATCH": "The password does not match.",
+    "REQUIRED": "This field is required.",
+    "INVALID_EMAIL": "Please enter a valid email.",
+    "INVALID_CREDENTIALS": "Invalid credentials."
+  }
+}

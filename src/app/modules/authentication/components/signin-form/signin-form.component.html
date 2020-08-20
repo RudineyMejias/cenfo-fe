@@ -1,10 +1,10 @@
 <div class="signin-form__card jumbotron">
-  <h4 class="signin-form__card-header">Sign In</h4>
+  <h4 class="signin-form__card-header">{{'AUTH.SIGNIN.TITLE' | translate}}</h4>
   <div class="signin-form__card-content">
-    <form [formGroup]="formGroup">
-      <cf-input placeholder="Email" formControlName="email"></cf-input>
-      <cf-input placeholder="Password" formControlName="password"></cf-input>
-      <button click="onSubmit()" class="btn btn-danger signin-form__submit btn-block">Sign In</button>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <cf-input type="text" [placeholder]="'AUTH.SIGNIN.EMAIL' | translate" formControlName="email"></cf-input>
+      <cf-input type="password" [placeholder]="'AUTH.SIGNIN.PASSWORD' | translate" formControlName="password"></cf-input>
+      <button type="submit" class="btn btn-danger signin-form__submit btn-block">{{'AUTH.SIGNIN.SUBMIT' | translate}}</button>
     </form>
   </div>
 </div>

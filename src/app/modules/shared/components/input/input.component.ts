@@ -16,9 +16,9 @@ export class InputComponent implements ControlValueAccessor {
     if (this.ngControl.invalid) {
       const errorKey = Object.keys(this.ngControl.errors).find(x => this.ngControl.errors[x]);
       const errors = {
-        confirmPassword: 'The password does not match.',
-        required: 'This field is required.',
-        email: 'Please enter a valid email.',
+        confirmPassword: 'ERRORS.PASSWORD_MATCH',
+        required: 'ERRORS.REQUIRED',
+        email: 'ERRORS.INVALID_EMAIL',
       };
       return errors[errorKey];
     }

@@ -1,0 +1,33 @@
+{
+  "FEED": {
+    "RECENT_NOTIFICATIONS": {
+      "TITLE": "Notificationes Recientes"
+    }
+  },
+  "AUTH": {
+    "SIGNUP": {
+      "TITLE": "Crear Una Cuenta",
+      "WELCOME": "Bienvenidos a nuestro mundo",
+      "FIRST_NAME": "Nombre",
+      "LAST_NAME": "Apellido",
+      "EMAIL": "Correo electronico",
+      "PASSWORD": "Contrasena",
+      "CONFIRM_PASSWORD": "Confirmar contrasena",
+      "READ": "He leido y aceptado los",
+      "TERMS": "terminos de uso",
+      "SUBMIT": "Crear Cuenta"
+    },
+    "SIGNIN": {
+      "TITLE": "Iniciar Sesion",
+      "EMAIL": "Correo electronico",
+      "PASSWORD": "Contrasena",
+      "SUBMIT": "Iniciar Sesion"
+    }
+  },
+  "ERRORS": {
+    "PASSWORD_MATCH": "Las contrasenas no coinciden.",
+    "REQUIRED": "Este campo es requerido.",
+    "INVALID_EMAIL": "Por favor, introduzca un correo electronico valido.",
+    "INVALID_CREDENTIALS": "Credenciales invalidos."
+  }
+}

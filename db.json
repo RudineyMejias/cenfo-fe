@@ -38,10 +38,12 @@
       "updated_date": 1595986996550,
       "image_url": "https://picsum.photos/seed/picsum/200/300",
       "parent_feed_id": 3,
-      "reactions": [{
-        "reaction_type": "like",
-        "user_id": 2
-      }]
+      "reactions": [
+        {
+          "reaction_type": "like",
+          "user_id": 2
+        }
+      ]
     }
   ],
   "users": [
@@ -67,14 +69,5 @@
       "email": "mario@gmail.com"
     }
   ],
-  "login": {
-    "user": {
-      "id": 1,
-      "photo_url": "https://picsum.photos/200/200?grayscale",
-      "name": "Rudiney",
-      "last_name": "Mejias",
-      "email": "rudymejias@gmail.com"
-    },
-    "access_token": "312eddad1rrfe.dsad32gf4r4f.dsadsqd32d32"
-  }
+  "login": {}
 }

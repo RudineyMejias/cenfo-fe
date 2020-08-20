@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://cenfo-api.herokuapp.com',
+  apiUrl: 'http://localhost:3000',
+  validEmail: 'test@test.com',
+  validPassword: 'test',
 };
 
 /*
