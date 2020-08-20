@@ -1,4 +1,6 @@
 @import 'src/styles/colors';
+@import 'src/styles/mixins';
+@import "~bootstrap/scss/bootstrap";
 
 .cf-navbar {
   height: 70px;
@@ -18,7 +20,23 @@
       top: 0;
       width: 50%;
       height: 100%;
-      background-color: $color-punch;
+      background-color: theme-color('danger');
+    }
+  }
+
+  &__options {
+    max-width: 50%;
+    justify-content: space-between;
+
+    & .navbar-nav .nav-link { // Needed for specificity
+      @include tabs-width-transition(theme-color('danger'));
+      color: $color-mine-shaft;
+      font-weight: 700;
+      padding: 1.5em 1.5em;
+
+      &:hover {
+        color: theme-color('danger');
+      }
     }
   }
 }

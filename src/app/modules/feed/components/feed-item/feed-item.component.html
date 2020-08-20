@@ -3,8 +3,8 @@
     <div class="mb-3">
       <cf-feed-item-header></cf-feed-item-header>
     </div>
-    <p class="card-text feed-item__text mb-3">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-    <img src="https://picsum.photos/510/270" class="img-fluid rounded feed-item__image">
+    <p class="card-text feed-item__text mb-3">{{feed.text}}</p>
+    <img [src]="feed.image_url" class="img-fluid rounded feed-item__image">
 
     <div class="pt-4">
       <cf-feed-item-footer></cf-feed-item-footer>

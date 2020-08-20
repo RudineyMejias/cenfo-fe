@@ -9,6 +9,7 @@ import { FeedItemHeaderComponent } from './components/feed-item-header/feed-item
 import { FeedItemFooterComponent } from './components/feed-item-footer/feed-item-footer.component';
 import { FeedItemCommentsComponent } from './components/feed-item-comments/feed-item-comments.component';
 import { SharedModule } from '@/shared/shared.module';
+import { FeedService } from './services/feed.service';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SharedModule } from '@/shared/shared.module';
     FeedItemFooterComponent,
     FeedItemCommentsComponent
   ],
+  providers: [FeedService],
   imports: [
     FeedRoutingModule,
     SharedModule,

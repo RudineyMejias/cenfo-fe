@@ -5,7 +5,11 @@
     </div>
   </div>
   <div class="col-md-6">
-    <cf-feed-item></cf-feed-item>
+    <ng-container *ngFor="let feed of feeds">
+      <div class="pb-5">
+        <cf-feed-item [feed]="feed"></cf-feed-item>
+      </div>
+    </ng-container>
   </div>
   <div class="col-md-3">
     <cf-recent-nofitications></cf-recent-nofitications>

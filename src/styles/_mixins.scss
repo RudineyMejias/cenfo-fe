@@ -13,3 +13,27 @@
     }
   }
 }
+
+@mixin tabs-width-transition($color, $time: .2s) {
+  position: relative;
+
+  &:hover:after,
+  &.active:after {
+    transition: all $time ease;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+  }
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 0;
+    height: 2px;
+    transition: all $time ease;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: $color;
+  }
+}

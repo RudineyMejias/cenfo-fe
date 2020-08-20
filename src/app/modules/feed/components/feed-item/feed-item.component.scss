@@ -8,6 +8,8 @@
 
   &__image {
     width: 100%;
+    max-height: 18em;
+    object-fit: cover;
   }
 
   &__comments {
