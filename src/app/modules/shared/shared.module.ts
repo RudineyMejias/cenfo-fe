@@ -5,20 +5,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from '@/shared/components/input/input.component';
 import { NavbarComponent } from '@/shared/components/navbar/navbar.component';
 import { TimeAgoPipe } from '@/shared/pipes/time-ago.pipe';
-import { TranslatePipe } from '@/shared/pipes/translate.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 const exportedModules = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
   HammerModule,
+  TranslateModule,
 ];
 
 const components = [
   InputComponent,
   NavbarComponent,
   TimeAgoPipe,
-  TranslatePipe
 ];
 
 @NgModule({

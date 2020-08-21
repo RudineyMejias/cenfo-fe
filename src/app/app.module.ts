@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NgModule } from '@angular/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppRoutingModule } from '@/app-routing.module';
 import { AppComponent } from '@/app.component';
 import { CoreModule } from '@/core/core.module';
@@ -28,6 +29,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AuthenticationModule,
     NgbModule,
     NgxUiLoaderModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
