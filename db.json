@@ -28,7 +28,12 @@
       "updated_date": 1595986794015,
       "image_url": "https://picsum.photos/seed/picsum/200/300",
       "parent_feed_id": null,
-      "reactions": []
+      "reactions": [
+        {
+          "reaction_type": "like",
+          "user_id": 2
+        }
+      ]
     },
     {
       "id": 4,
@@ -38,6 +43,19 @@
       "updated_date": 1595986996550,
       "image_url": "https://picsum.photos/seed/picsum/200/300",
       "parent_feed_id": 3,
+      "reactions": [
+        {
+          "reaction_type": "like",
+          "user_id": 2
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "creator_user_id": 2,
+      "text": "A feed comments by one user",
+      "created_date": 1597976241133,
+      "updated_date": 1597976241133,
       "reactions": [
         {
           "reaction_type": "like",

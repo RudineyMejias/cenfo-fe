@@ -32,5 +32,18 @@
     "REQUIRED": "This field is required.",
     "INVALID_EMAIL": "Please enter a valid email.",
     "INVALID_CREDENTIALS": "Invalid credentials."
+  },
+  "TIMES": {
+    "DAY_AGO": "a day ago",
+    "DAYS_AGO": "{{value}} days ago",
+    "HOUR_AGO": "an hour ago",
+    "HOURS_AGO": "{{value}} hours ago",
+    "MINUTE_AGO": "a minute ago",
+    "MINUTES_AGO": "{{value}} minutes ago",
+    "MONTH_AGO": "a month ago",
+    "MONTHS_AGO": "{{value}} months ago",
+    "SECONDS_AGO": "a few seconds ago",
+    "YEAR_AGO": "a year ago",
+    "YEARS_AGO": "{{value}} years ago"
   }
 }

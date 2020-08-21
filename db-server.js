@@ -69,7 +69,8 @@ middlewares.push((req, res, next) => {
 
 server.use(bodyParser.json());
 server.use(jsonServer.rewriter({
-  '/users/:id': '/users?id=:id'
+  '/users/:id': '/users?id=:id',
+  '/feeds': '/feeds?_sort=created_date&_order=desc',
 }));
 server.use(middlewares)
 server.use(router)

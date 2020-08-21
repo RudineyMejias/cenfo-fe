@@ -1,7 +1,7 @@
 <div class="card p-3 feed-item">
   <div class="card-body">
     <div class="mb-3">
-      <cf-feed-item-header></cf-feed-item-header>
+      <cf-feed-item-header [feed]="feed"></cf-feed-item-header>
     </div>
     <p class="card-text feed-item__text mb-3">{{feed.text}}</p>
     <img [src]="feed.image_url" class="img-fluid rounded feed-item__image">

@@ -32,5 +32,18 @@
     "REQUIRED": "Este campo es requerido.",
     "INVALID_EMAIL": "Por favor, introduzca un correo electronico valido.",
     "INVALID_CREDENTIALS": "Credenciales invalidos."
+  },
+  "TIMES": {
+    "DAY_AGO": "hace un dia",
+    "DAYS_AGO": "hace {{value}} dias",
+    "HOUR_AGO": "hace una hora",
+    "HOURS_AGO": "hace {{value}} horas",
+    "MINUTE_AGO": "hace un minuto",
+    "MINUTES_AGO": "hace {{value}} minuto",
+    "MONTH_AGO": "hace un mes",
+    "MONTHS_AGO": "hace {{value}} meses",
+    "SECONDS_AGO": "hace unos segundos",
+    "YEAR_AGO": "hace un año",
+    "YEARS_AGO": "hace {{value}} años"
   }
 }
