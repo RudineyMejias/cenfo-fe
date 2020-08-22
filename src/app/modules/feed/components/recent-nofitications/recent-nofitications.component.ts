@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { BaseComponent } from '@/shared/components/base/base.component';
 
 @Component({
@@ -6,14 +6,9 @@ import { BaseComponent } from '@/shared/components/base/base.component';
   templateUrl: './recent-nofitications.component.html',
   styleUrls: ['./recent-nofitications.component.scss']
 })
-export class RecentNofiticationsComponent extends BaseComponent implements OnInit {
+export class RecentNofiticationsComponent extends BaseComponent {
 
   constructor(injector: Injector) {
     super(injector);
-    this.wordingKey = 'FEED.RECENT_NOTIFICATIONS';
   }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,0 +1,18 @@
+<button
+  type="button"
+  class="btn feed-actions__button"
+  [ngClass]="{'feed-actions__button--active': !!selectedReaction}"
+  placement="top-center"
+  [ngbPopover]="popOver"
+  popoverClass="popover-custom"
+  #popOverRef="ngbPopover"
+  triggers="manual"
+  [autoClose]="true"
+  (click)="popOverRef.toggle()"
+>
+  <i class="bi bi-like mr-2"></i>
+  <span *ngIf="selectedReaction" class="feed-actions__description">{{selectedReaction?.reaction_type}}</span>
+</button>
+<ng-template #popOver>
+    <popover [data]="options" [popover]="popOverRef">ggffdgsdgfdsgfds</popover>
+</ng-template>

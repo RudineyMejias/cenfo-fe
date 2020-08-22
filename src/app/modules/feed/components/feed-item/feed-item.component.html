@@ -3,15 +3,15 @@
     <div class="mb-3">
       <cf-feed-item-header [feed]="feed"></cf-feed-item-header>
     </div>
-    <p class="card-text feed-item__text mb-3">{{feed.text}}</p>
-    <img [src]="feed.image_url" class="img-fluid rounded feed-item__image">
+    <p *ngIf="feed.text" class="card-text feed-item__text mb-3">{{feed.text}}</p>
+    <img *ngIf="feed.image_url" [src]="feed.image_url" class="img-fluid rounded feed-item__image">
 
     <div class="pt-4">
-      <cf-feed-item-footer></cf-feed-item-footer>
+      <cf-feed-item-footer [reactions]="feed.reactions" [numberOfComments]="feed.comments?.length"></cf-feed-item-footer>
     </div>
 
-    <div class="feed-item__comments pt-4">
+    <!-- <div class="feed-item__comments pt-4">
       <cf-feed-item-comments></cf-feed-item-comments>
-    </div>
+    </div> -->
   </div>
 </div>

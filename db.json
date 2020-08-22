@@ -6,7 +6,7 @@
       "text": "One amazing post 1",
       "created_date": 1595986659005,
       "updated_date": 1595986659005,
-      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "image_url": "https://picsum.photos/600/400",
       "parent_feed_id": null,
       "reactions": []
     },
@@ -16,7 +16,7 @@
       "text": "One amazing post 2",
       "created_date": 1595986776408,
       "updated_date": 1595986776408,
-      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "image_url": "https://picsum.photos/600/400",
       "parent_feed_id": null,
       "reactions": []
     },
@@ -26,12 +26,20 @@
       "text": "One amazing post 3",
       "created_date": 1595986794015,
       "updated_date": 1595986794015,
-      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "image_url": "https://picsum.photos/600/400",
       "parent_feed_id": null,
       "reactions": [
         {
           "reaction_type": "like",
           "user_id": 2
+        },
+        {
+          "reaction_type": "like",
+          "user_id": 1
+        },
+        {
+          "reaction_type": "love",
+          "user_id": 3
         }
       ]
     },
@@ -41,7 +49,7 @@
       "text": "A feed comments by one user",
       "created_date": 1595986996550,
       "updated_date": 1595986996550,
-      "image_url": "https://picsum.photos/seed/picsum/200/300",
+      "image_url": "https://picsum.photos/600/400",
       "parent_feed_id": 3,
       "reactions": [
         {

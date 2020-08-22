@@ -12,4 +12,5 @@ export interface Feed {
   parent_feed_id: number;
   reactions: Reaction[];
   user?: User;
+  comments?: Feed[];
 }

@@ -12,10 +12,17 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  private isAuthenticatedSubject = new BehaviorSubject(!!localStorage.getItem(LocalStorageKeys.AUTH));
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(!!localStorage.getItem(LocalStorageKeys.AUTH));
+  private authenticatedUserSubject = new BehaviorSubject<User>(localStorage.getItem(
+    LocalStorageKeys.AUTH) &&
+    JSON.parse(localStorage.getItem(LocalStorageKeys.AUTH))?.user);
 
   get isAuthenticated$(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
+  }
+
+  get authenticatedUser$(): Observable<User> {
+    return this.authenticatedUserSubject.asObservable();
   }
 
   constructor(private readonly requestService: RequestService) { }
@@ -31,5 +38,6 @@ export class AuthenticationService {
   logout(): void {
     localStorage.removeItem(LocalStorageKeys.AUTH);
     this.isAuthenticatedSubject.next(false);
+    this.authenticatedUserSubject.next(undefined);
   }
 }

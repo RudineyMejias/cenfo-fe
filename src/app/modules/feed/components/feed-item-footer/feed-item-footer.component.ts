@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Reaction } from '@/modules/shared/models/reaction.model';
+import { AuthenticationService } from '@/core/services/authentication.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from '@/shared/models/user.model';
 
 @Component({
   selector: 'cf-feed-item-footer',
   templateUrl: './feed-item-footer.component.html',
   styleUrls: ['./feed-item-footer.component.scss']
 })
-export class FeedItemFooterComponent implements OnInit {
+export class FeedItemFooterComponent {
 
-  constructor() { }
+  @Input() numberOfComments: number;
+  @Input() reactions: Reaction[];
 
-  ngOnInit(): void {
+  get reactionIcons(): string[] {
+    return this.reactions.map(r => `/assets/images/${r.reaction_type}.png`)
+      .filter((value, index, self) => self.indexOf(value) === index);
   }
 
+  get ownReaction$(): Observable<Reaction> {
+    return this.authenticationService.authenticatedUser$.pipe(
+      map((user: User) => this.reactions.find((r) => r.user_id === user.id))
+    );
+  }
+
+  constructor(private readonly authenticationService: AuthenticationService) {}
 }

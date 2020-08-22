@@ -1,12 +1,11 @@
 <div class="feed-item-footer">
   <div class="feed-item-footer__reactions">
-    <img src="/assets/images/like.png">
-    <img src="/assets/images/dislike.png">
-    <img src="/assets/images/happy.png">
-    <img src="/assets/images/sad.png">
-    <img src="/assets/images/love.png">
+    <img *ngFor="let icon of reactionIcons" [src]="icon">
   </div>
-  <button class="btn feed-item-footer__button">
-    <i class="bi bi-chat-bubble mr-2"></i> <span class="feed-item-footer__description">41</span>
-  </button>
+  <div class="d-flex">
+    <cf-reaction-select [selectedReaction]="ownReaction$ | async"></cf-reaction-select>
+    <button class="btn feed-actions__button">
+      <i class="bi bi-chat-bubble mr-2"></i> <span class="feed-actions__description">{{numberOfComments}}</span>
+    </button>
+  </div>
 </div>

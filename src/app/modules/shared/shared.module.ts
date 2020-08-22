@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HammerModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ const exportedModules = [
   ReactiveFormsModule,
   HammerModule,
   TranslateModule,
+  NgbModule,
 ];
 
 const components = [

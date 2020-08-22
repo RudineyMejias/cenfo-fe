@@ -32,8 +32,11 @@ export class FeedComponent implements OnInit {
     }).subscribe(
       ({ feeds, users }) => {
         this.users = users;
-        this.feeds = feeds;
-        this.feeds.forEach((feed) => feed.user = users.find((u) => u.id === feed.creator_user_id));
+        feeds.forEach((feed) => {
+          feed.user = users.find((u) => u.id === feed.creator_user_id);
+          feed.comments = feeds.filter(f => f.parent_feed_id === feed.id);
+        });
+        this.feeds = feeds.filter(f => !f.parent_feed_id);
       },
       (e) => this.toastrService.error(e?.error?.message),
       () => this.loadingService.stopLoading()

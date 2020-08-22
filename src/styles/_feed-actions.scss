@@ -1,0 +1,24 @@
+@import 'src/styles/colors';
+@import "~bootstrap/scss/bootstrap";
+
+.feed-actions {
+  &__button.btn {
+    color: $color-mine-shaft;
+    font-size: 1.5em;
+    display: flex;
+
+    &:hover,
+    &--active {
+      color: theme-color('danger');
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  &__description {
+    font-size: .6em;
+  }
+}
