@@ -11,6 +11,7 @@ import { FeedItemCommentsComponent } from './components/feed-item-comments/feed-
 import { SharedModule } from '@/shared/shared.module';
 import { FeedService } from './services/feed.service';
 import { ReactionSelectComponent } from './components/reaction-select/reaction-select.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ReactionSelectComponent } from './components/reaction-select/reaction-s
     FeedItemHeaderComponent,
     FeedItemFooterComponent,
     FeedItemCommentsComponent,
-    ReactionSelectComponent
+    ReactionSelectComponent,
+    CreatePostComponent
   ],
   providers: [FeedService],
   imports: [

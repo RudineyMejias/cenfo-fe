@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@/core/services/authentication.service';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'cf-navbar',
@@ -13,5 +14,12 @@ export class NavbarComponent {
     return this.authenticationService.isAuthenticated$;
   }
 
-  constructor(private readonly authenticationService: AuthenticationService) { }
+  constructor(
+    private readonly authenticationService: AuthenticationService,
+    private readonly translateService: TranslateService
+  ) { }
+
+  changeLanguage(lang: string): void {
+    this.translateService.setDefaultLang(lang);
+  }
 }

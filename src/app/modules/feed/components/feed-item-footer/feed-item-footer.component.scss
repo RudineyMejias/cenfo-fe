@@ -1,7 +1,7 @@
 @import 'src/styles/colors';
-@import "src/styles/feed-actions";
 @import "~bootstrap/scss/bootstrap";
 @import 'src/styles/mixins';
+@import "src/styles/feed-actions";
 
 .feed-item-footer {
   display: flex;
@@ -10,8 +10,8 @@
   &__reactions {
     @include overlap-elements(-.9em);
     & > * {
-      width: 2em;
-      height: 2em;
+      width: 1.7em;
+      height: 1.7em;
     }
   }
 }

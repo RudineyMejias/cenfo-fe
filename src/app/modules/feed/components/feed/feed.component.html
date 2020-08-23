@@ -5,9 +5,12 @@
     </div>
   </div>
   <div class="col-md-6">
+    <div class="pb-5">
+      <cf-create-post></cf-create-post>
+    </div>
     <ng-container *ngFor="let feed of feeds">
       <div class="pb-5">
-        <cf-feed-item [feed]="feed"></cf-feed-item>
+        <cf-feed-item (selectReaction)="reactionClick($event)" [feed]="feed"></cf-feed-item>
       </div>
     </ng-container>
   </div>

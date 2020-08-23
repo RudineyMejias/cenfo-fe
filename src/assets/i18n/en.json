@@ -1,8 +1,20 @@
 {
   "NAVBAR": {
-    "BANNER": "It helps you to connect and share with the people in your life"
+    "BANNER": "It helps you to connect and share with the people in your life",
+    "HOME": "Home",
+    "LANGUAGES": {
+      "EN": "English",
+      "ES": "Spanish"
+    }
   },
   "FEED": {
+    "REACTIONS": {
+      "HAHA": "haha",
+      "WOW": "wow",
+      "ANGRY": "angry",
+      "LIKE": "like",
+      "LOVE": "love"
+    },
     "RECENT_NOTIFICATIONS": {
       "TITLE": "Recent Notifications"
     }

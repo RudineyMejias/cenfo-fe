@@ -1,8 +1,20 @@
 {
   "NAVBAR": {
-    "BANNER": "Te ayuda a conectarte y compartir con personas en tu vida"
+    "BANNER": "Te ayuda a conectarte y compartir con personas en tu vida",
+    "HOME": "Inicio",
+    "LANGUAGES": {
+      "EN": "Inglés",
+      "ES": "Español"
+    }
   },
   "FEED": {
+    "REACTIONS": {
+      "HAHA": "jaja",
+      "WOW": "wow",
+      "ANGRY": "me enoja",
+      "LIKE": "me gusta",
+      "LOVE": "me encanta"
+    },
     "RECENT_NOTIFICATIONS": {
       "TITLE": "Notificationes Recientes"
     }

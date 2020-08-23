@@ -11,8 +11,17 @@
   (click)="popOverRef.toggle()"
 >
   <i class="bi bi-like mr-2"></i>
-  <span *ngIf="selectedReaction" class="feed-actions__description">{{selectedReaction?.reaction_type}}</span>
+  <span *ngIf="selectedReaction" class="feed-actions__description">{{getWordingKey(selectedReaction?.reaction_type) | translate}}</span>
 </button>
 <ng-template #popOver>
-    <popover [data]="options" [popover]="popOverRef">ggffdgsdgfdsgfds</popover>
+    <popover [data]="options" [popover]="popOverRef">
+      <div class="d-flex">
+        <button *ngFor="let type of reactionTypes"
+          class="btn cf-reaction-select__reaction d-flex flex-column align-items-center mx-1"
+          (click)="reactionClick(type)">
+          <img class="img-fluid cf-reaction-select__reaction-icon" [src]="type.url"/>
+          <span>{{type.display | translate}}</span>
+        </button>
+      </div>
+    </popover>
 </ng-template>

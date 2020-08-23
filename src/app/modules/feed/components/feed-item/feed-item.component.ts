@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Feed } from '@/shared/models/feed.model';
 
 @Component({
@@ -9,4 +9,5 @@ import { Feed } from '@/shared/models/feed.model';
 })
 export class FeedItemComponent {
   @Input() feed: Feed;
+  @Output() selectReaction = new EventEmitter<string>();
 }

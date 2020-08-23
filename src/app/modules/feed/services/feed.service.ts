@@ -13,4 +13,12 @@ export class FeedService {
   getFeedItems(): Observable<Feed[]> {
     return this.requestService.get<Feed[]>(this.basePath);
   }
+
+  getRecentNotifications(): Observable<Feed[]> {
+    return this.requestService.get<Feed[]>(`${this.basePath}`);
+  }
+
+  addFeed(feed: Feed): Observable<Feed> {
+    return this.requestService.post(this.basePath, feed);
+  }
 }

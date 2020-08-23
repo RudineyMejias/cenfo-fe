@@ -7,7 +7,11 @@ const middlewares = jsonServer.defaults()
 const fs = require('fs');
 const jsonData = JSON.parse(fs.readFileSync('./db.json', 'utf8'));
 
-let totalRequests = 100;
+let totalRequests = 50;
+
+const getNextId = (elements) => {
+  elements.map(e => e.id).sort((a, b) => b - a)[0] + 1;
+}
 
 const validEmails = jsonData.users.map((user) => user.email);
 
@@ -67,10 +71,61 @@ middlewares.push((req, res, next) => {
   }
 });
 
+middlewares.push((req, res, next) => {
+  if (req.method === 'GET' && req.originalUrl === '/feeds') {
+    const body = [...jsonData.feeds.map((f) => ({...f}))];
+    body.forEach((f) => f.user = jsonData.users.find((u) => u.id === f.creator_user_id))
+    body.forEach((f) => {
+      f.reactions.forEach((r) =>
+        r.user = jsonData.users.find((u) => r.user_id === u.id)
+      )
+    })
+    res.json(body.sort((a, b) => b.updated_date - a.updated_date));
+  } else {
+    next();
+  }
+});
+
+middlewares.push((req, res, next) => {
+  if (req.method === 'POST' && req.originalUrl === '/users') {
+    const user = {...req.body};
+    user.id = getNextId(jsonData.users);
+    user.photo_url = 'https://picsum.photos/200/200?grayscale',
+    jsonData.users.push(user);
+    res.json({user, token: 'authorization.token'});
+  } else {
+    next();
+  }
+});
+
+middlewares.push((req, res, next) => {
+  if (req.method === 'POST' && req.originalUrl === '/feeds') {
+    const feed = {...req.body};
+    feed.id = getNextId(userData.feeds);
+    feed.created_date = Date.now();
+    feed.updated_date = Date.now();
+    feed.reactions = [];
+    jsonData.feeds.push(feed);
+    res.json(feed);
+  } else {
+    next();
+  }
+});
+
+middlewares.push((req, res, next) => {
+  if (req.method === 'PUT' && req.originalUrl === '/feeds') {
+    re.body.updated_date = Date.now();
+    const feedIndex = jsonData.feeds.findIndex(f => f.id === req.body.id);
+    jsonData.feeds[feedIndex] = {...req.body};
+    res.json(jsonData.feeds[feedIndex]);
+  } else {
+    next();
+  }
+});
+
 server.use(bodyParser.json());
 server.use(jsonServer.rewriter({
   '/users/:id': '/users?id=:id',
-  '/feeds': '/feeds?_sort=created_date&_order=desc',
 }));
 server.use(middlewares)
 server.use(router)

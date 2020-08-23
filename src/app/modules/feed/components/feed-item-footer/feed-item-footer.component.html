@@ -3,7 +3,7 @@
     <img *ngFor="let icon of reactionIcons" [src]="icon">
   </div>
   <div class="d-flex">
-    <cf-reaction-select [selectedReaction]="ownReaction$ | async"></cf-reaction-select>
+    <cf-reaction-select (selectReaction)="selectReaction.emit($event)" [selectedReaction]="ownReaction$ | async"></cf-reaction-select>
     <button class="btn feed-actions__button">
       <i class="bi bi-chat-bubble mr-2"></i> <span class="feed-actions__description">{{numberOfComments}}</span>
     </button>

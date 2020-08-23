@@ -27,16 +27,29 @@
   &__options {
     max-width: 50%;
     justify-content: space-between;
+  }
 
-    & .navbar-nav .nav-link { // Needed for specificity
-      @include tabs-width-transition(theme-color('danger'));
-      color: $color-mine-shaft;
-      font-weight: 700;
-      padding: 1.5em 1.5em;
+  & .navbar-nav .nav-link { // Needed for specificity
+    @include tabs-width-transition(theme-color('danger'));
+    color: $color-mine-shaft;
+    font-weight: 700;
+    padding: 1.5em 1.5em;
 
-      &:hover {
-        color: theme-color('danger');
-      }
+    & i {
+      font-size: 1.3em;
+    }
+
+    &:hover {
+      color: theme-color('danger');
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:after {
+      border: 0 !important;
     }
   }
 }

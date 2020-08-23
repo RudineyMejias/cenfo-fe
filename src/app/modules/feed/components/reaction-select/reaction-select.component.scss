@@ -1,0 +1,23 @@
+@import "~bootstrap/scss/bootstrap";
+
+.cf-reaction-select {
+  &__reaction {
+    &-icon {
+      width: 2.2em;
+      height: 2.2em;
+    }
+
+    &.btn {
+      padding: 0;
+
+      &:focus {
+        outline: 0;
+        box-shadow: none;
+      }
+
+      &:hover {
+        color: theme-color('danger');
+      }
+    }
+  }
+}
