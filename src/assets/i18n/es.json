@@ -17,6 +17,13 @@
     },
     "RECENT_NOTIFICATIONS": {
       "TITLE": "Notificationes Recientes"
+    },
+    "CREATE_POST_MODAL": {
+      "TITLE": "Nuevo post",
+      "CLOSE": "Cerrar",
+      "SUBMIT": "Post",
+      "TEXT": "Escribe algo...",
+      "IMAGE": "Link de foto"
     }
   },
   "AUTH": {

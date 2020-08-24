@@ -7,6 +7,7 @@ import { InputComponent } from '@/shared/components/input/input.component';
 import { NavbarComponent } from '@/shared/components/navbar/navbar.component';
 import { TimeAgoPipe } from '@/shared/pipes/time-ago.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { BindingContextDirective } from './directives/binding-content.directive';
 
 const exportedModules = [
   CommonModule,
@@ -21,6 +22,7 @@ const components = [
   InputComponent,
   NavbarComponent,
   TimeAgoPipe,
+  BindingContextDirective,
 ];
 
 @NgModule({

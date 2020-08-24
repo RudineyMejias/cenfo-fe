@@ -12,8 +12,10 @@ export class ReactionSelectComponent {
   @Input() selectedReaction: Reaction;
   @Output() selectReaction = new EventEmitter<string>();
 
-  get reactionTypes(): { url: string, display: string }[] {
-    return Object.values(Reactions).map((r) => ({ url: `/assets/images/${r}.png`, display: this.getWordingKey(r) }));
+  get reactionTypes(): { type: string, url: string, display: string }[] {
+    return Object.values(Reactions).map((r) => 
+      ({ url: `/assets/images/${r}.png`, display: this.getWordingKey(r), type: r })
+    );
   }
 
   getWordingKey(reactionKey: string): string {
@@ -22,7 +24,7 @@ export class ReactionSelectComponent {
 
   reactionClick(reactionType: string): void {
     this.selectReaction.emit(
-      reactionType === this.selectedReaction.reaction_type ? undefined : reactionType
+      reactionType === this.selectedReaction?.reaction_type ? undefined : reactionType
     );
   }
 }

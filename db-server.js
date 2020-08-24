@@ -10,7 +10,7 @@ const jsonData = JSON.parse(fs.readFileSync('./db.json', 'utf8'));
 let totalRequests = 50;
 
 const getNextId = (elements) => {
-  elements.map(e => e.id).sort((a, b) => b - a)[0] + 1;
+  return elements.map(e => e.id).sort((a, b) => b - a)[0] + 1;
 }
 
 const validEmails = jsonData.users.map((user) => user.email);
@@ -101,7 +101,8 @@ middlewares.push((req, res, next) => {
 middlewares.push((req, res, next) => {
   if (req.method === 'POST' && req.originalUrl === '/feeds') {
     const feed = {...req.body};
-    feed.id = getNextId(userData.feeds);
+    feed.id = getNextId(jsonData.feeds);
+    feed.user = jsonData.users.find((u) => u.id === feed.creator_user_id);
     feed.created_date = Date.now();
     feed.updated_date = Date.now();
     feed.reactions = [];

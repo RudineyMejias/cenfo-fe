@@ -76,6 +76,8 @@
     {
       "id": 1,
       "photo_url": "https://picsum.photos/200/200?grayscale",
+      "cover_url": "https://picsum.photos/800/400",
+      "review": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       "name": "Rudiney",
       "last_name": "Mejias",
       "email": "test@test.com"
@@ -83,6 +85,8 @@
     {
       "id": 2,
       "photo_url": "https://picsum.photos/200/200?grayscale",
+      "cover_url": "https://picsum.photos/800/400",
+      "review": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       "name": "Yuleisy",
       "last_name": "Vega",
       "email": "jules@gmail.com"
@@ -90,6 +94,8 @@
     {
       "id": 3,
       "photo_url": "https://picsum.photos/200/200?grayscale",
+      "cover_url": "https://picsum.photos/800/400",
+      "review": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       "name": "Mario",
       "last_name": "Jimenez",
       "email": "mario@gmail.com"

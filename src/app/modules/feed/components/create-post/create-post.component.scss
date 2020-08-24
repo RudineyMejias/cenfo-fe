@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+
+.cf-create-post {
+  &__close {
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &:hover {
+      color: theme-color('danger');
+    }
+  }
+}

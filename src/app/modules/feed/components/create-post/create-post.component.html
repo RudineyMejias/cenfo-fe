@@ -1,1 +1,33 @@
-<p>create-post works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">{{'FEED.CREATE_POST_MODAL.TITLE' | translate}}</h4>
+  <button type="button" class="cf-create-post__close close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<ng-container *cfBindingContext="let user be (user$ | async)">
+  <div class="modal-body">
+    <form [formGroup]="formGroup" class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <img class="img-fluid rounded-circle" [src]="user.photo_url"/>
+        </div>
+        <div class="col-md-9">
+          <cf-input
+            formControlName="text"
+            [placeholder]="'FEED.CREATE_POST_MODAL.TEXT' | translate"
+            [multiline]="true"
+            [rows]="1">
+          </cf-input>
+          <cf-input
+            formControlName="image_url"
+            [placeholder]="'FEED.CREATE_POST_MODAL.IMAGE' | translate">
+          </cf-input>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss()">{{'FEED.CREATE_POST_MODAL.CLOSE' | translate}}</button>
+    <button type="button" class="btn btn-danger" (click)="onSubmit(user)">{{'FEED.CREATE_POST_MODAL.SUBMIT' | translate}}</button>
+  </div>
+</ng-container>

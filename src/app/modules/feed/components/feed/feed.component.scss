@@ -1,0 +1,11 @@
+.cf-feed {
+  &__add-post.btn {
+    position: fixed;
+    bottom: 3em;
+    right: 3em;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    padding: 0;
+  }
+}

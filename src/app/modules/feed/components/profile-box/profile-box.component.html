@@ -1,10 +1,12 @@
 <div class="card">
-  <img src="https://picsum.photos/800/400" class="card-img-top">
-  <div class="card-body text-center profile-box__content">
-    <img src="https://picsum.photos/100/100" class="rounded-circle profile-box__photo mb-3">
-    <a [routerLink]="'/profile'" class="profile-box__title">
-      <h5 class="card-title">Card title</h5>
-    </a>
-    <small class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</small>
-  </div>
+  <ng-container *cfBindingContext="let user be (user$ | async)">
+    <img [src]="user.cover_url" class="card-img-top">
+    <div class="card-body text-center profile-box__content">
+    <img [src]="user.photo_url" class="rounded-circle profile-box__photo mb-3">
+      <a [routerLink]="'/profile'" class="profile-box__title">
+        <h5 class="card-title">{{user.name}} {{user.last_name}}</h5>
+      </a>
+      <small class="card-text">{{user.review}}</small>
+    </div>
+  </ng-container>
 </div>

@@ -9,5 +9,9 @@ import { Feed } from '@/shared/models/feed.model';
 })
 export class FeedItemComponent {
   @Input() feed: Feed;
-  @Output() selectReaction = new EventEmitter<string>();
+  @Output() selectReaction = new EventEmitter<{ reactionType: string; feed: Feed; }>();
+
+  changeReaction(reactionType: string): void {
+    this.selectReaction.emit({ reactionType, feed: this.feed });
+  }
 }

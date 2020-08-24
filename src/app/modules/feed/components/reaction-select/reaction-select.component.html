@@ -17,8 +17,8 @@
     <popover [data]="options" [popover]="popOverRef">
       <div class="d-flex">
         <button *ngFor="let type of reactionTypes"
-          class="btn cf-reaction-select__reaction d-flex flex-column align-items-center mx-1"
-          (click)="reactionClick(type)">
+          class="btn cf-reaction-select__reaction d-flex flex-column align-items-center px-1"
+          (click)="reactionClick(type.type)">
           <img class="img-fluid cf-reaction-select__reaction-icon" [src]="type.url"/>
           <span>{{type.display | translate}}</span>
         </button>
