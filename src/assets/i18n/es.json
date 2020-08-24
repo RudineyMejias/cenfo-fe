@@ -8,6 +8,7 @@
     }
   },
   "FEED": {
+    "FEED_ADDED": "Nuevo post agregado",
     "REACTIONS": {
       "HAHA": "jaja",
       "WOW": "wow",

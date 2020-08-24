@@ -24,7 +24,7 @@ export class FeedItemFooterComponent {
 
   get ownReaction$(): Observable<Reaction> {
     return this.authenticationService.authenticatedUser$.pipe(
-      map((user: User) => this.reactions.find((r) => r.user.id === user.id))
+      map((user: User) => this.reactions?.find((r) => r.user?.id === user.id))
     );
   }
 

@@ -21,4 +21,8 @@ export class FeedService {
   addFeed(feed: Feed): Observable<Feed> {
     return this.requestService.post(this.basePath, feed);
   }
+
+  updateFeed(feed: Feed): Observable<Feed> {
+    return this.requestService.put(this.basePath, feed);
+  }
 }

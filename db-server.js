@@ -76,9 +76,7 @@ middlewares.push((req, res, next) => {
     const body = [...jsonData.feeds.map((f) => ({...f}))];
     body.forEach((f) => f.user = jsonData.users.find((u) => u.id === f.creator_user_id))
     body.forEach((f) => {
-      f.reactions.forEach((r) =>
-        r.user = jsonData.users.find((u) => r.user_id === u.id)
-      )
+      f.reactions.forEach((r) => r.user = jsonData.users.find((u) => r.user_id === u.id))
     })
     res.json(body.sort((a, b) => b.updated_date - a.updated_date));
   } else {
@@ -108,6 +106,21 @@ middlewares.push((req, res, next) => {
     feed.reactions = [];
     jsonData.feeds.push(feed);
     res.json(feed);
+  } else {
+    next();
+  }
+});
+
+middlewares.push((req, res, next) => {
+  if (req.method === 'PUT' && req.originalUrl === '/feeds') {
+    const feed = {...req.body};
+    feed.reactions.forEach((r) => {
+      r.user_id = r.user.id;
+    });
+    const feedIndex = jsonData.feeds.findIndex((f) => f.id === feed.id);
+    console.log(feed);
+    jsonData.feeds[feedIndex] = feed;
+    res.json(req.body);
   } else {
     next();
   }

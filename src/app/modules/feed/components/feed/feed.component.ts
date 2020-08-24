@@ -9,6 +9,7 @@ import { CreatePostComponent } from '@/feed/components/create-post/create-post.c
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { take } from 'rxjs/operators';
 import { Reaction } from '@/modules/shared/models/reaction.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'cf-feed',
@@ -26,6 +27,7 @@ export class FeedComponent implements OnInit {
     private readonly loadingService: LoadingService,
     private readonly toastrService: ToastrService,
     private readonly modalService: NgbModal,
+    private readonly translateService: TranslateService,
     private readonly authenticationService: AuthenticationService
   ) {
     this.saveNewPost = this.saveNewPost.bind(this);
@@ -51,19 +53,33 @@ export class FeedComponent implements OnInit {
     this.loadingService.stopLoading();
   }
 
-  reactionClick({ reactionType, feed }: { reactionType: string; feed: Feed; }): void {
+  async reactionClick({ reactionType, feed }: { reactionType: string; feed: Feed; }): Promise<void> {
     const feedCopy = { ...feed };
     const reactionToRemoveIndex = feedCopy.reactions.findIndex((r) => r.user.id === this.authenticatedUser.id);
     if (reactionToRemoveIndex >= 0) {
       feedCopy.reactions.splice(reactionToRemoveIndex, 1);
     }
     if (reactionType) {
-      const reactionToAdd: Reaction = { reaction_type: reactionType, user: { ...this.authenticatedUser } };
+      const reactionToAdd: Reaction = {
+        reaction_type: reactionType,
+        user: { ...this.authenticatedUser }
+      };
       feedCopy.reactions.push(reactionToAdd);
     }
 
-    const feedIndex = this.feeds.indexOf(feed);
-    this.feeds[feedIndex] = feedCopy;
+    await this.updateFeed(feedCopy);
+  }
+
+  async updateFeed(feed: Feed): Promise<void> {
+    this.loadingService.startLoading();
+    try {
+      const feedIndex = this.feeds.findIndex((f) => f.id === feed.id);
+      const updatedFeed = await this.feedService.updateFeed(feed).toPromise();
+      this.feeds[feedIndex] = updatedFeed;
+    } catch (e) {
+      this.toastrService.error(e?.error?.message);
+    }
+    this.loadingService.stopLoading();
   }
 
   async saveNewPost(feed: Feed, modal: NgbActiveModal): Promise<void> {
@@ -72,6 +88,8 @@ export class FeedComponent implements OnInit {
       const newFeed = await this.feedService.addFeed(feed).toPromise();
       this.feeds = [newFeed].concat(this.feeds);
       modal.dismiss();
+      const successMessage = await this.translateService.get('FEED.FEED_ADDED').toPromise();
+      this.toastrService.info(successMessage);
     } catch (e) {
       this.toastrService.error(e?.error?.message);
     }
