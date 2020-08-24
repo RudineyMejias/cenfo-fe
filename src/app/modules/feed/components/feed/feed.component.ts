@@ -31,6 +31,7 @@ export class FeedComponent implements OnInit {
     private readonly authenticationService: AuthenticationService
   ) {
     this.saveNewPost = this.saveNewPost.bind(this);
+    this.updateFeed = this.updateFeed.bind(this);
   }
 
   async ngOnInit(): Promise<void> {
@@ -70,12 +71,13 @@ export class FeedComponent implements OnInit {
     await this.updateFeed(feedCopy);
   }
 
-  async updateFeed(feed: Feed): Promise<void> {
+  async updateFeed(feed: Feed, modal?: NgbActiveModal): Promise<void> {
     this.loadingService.startLoading();
     try {
       const feedIndex = this.feeds.findIndex((f) => f.id === feed.id);
       const updatedFeed = await this.feedService.updateFeed(feed).toPromise();
       this.feeds[feedIndex] = updatedFeed;
+      modal?.dismiss();
     } catch (e) {
       this.toastrService.error(e?.error?.message);
     }
@@ -94,6 +96,24 @@ export class FeedComponent implements OnInit {
       this.toastrService.error(e?.error?.message);
     }
     this.loadingService.stopLoading();
+  }
+
+  async removePost(feed: Feed): Promise<void> {
+    this.loadingService.startLoading();
+    try {
+      this.feeds = await this.feedService.deleteFeed(feed.id).toPromise();
+      const successMessage = await this.translateService.get('FEED.FEED_REMOVED').toPromise();
+      this.toastrService.info(successMessage);
+    } catch (e) {
+      this.toastrService.error(e?.error?.message);
+    }
+    this.loadingService.stopLoading();
+  }
+
+  async editPost(feed: Feed): Promise<void> {
+    const modalRef = this.modalService.open(CreatePostComponent);
+    modalRef.componentInstance.submitPost = this.updateFeed;
+    modalRef.componentInstance.feed = feed;
   }
 
   openPostModal(): void {

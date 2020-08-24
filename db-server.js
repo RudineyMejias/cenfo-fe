@@ -28,6 +28,15 @@ const messages = {
   }
 }
 
+const mapFeedItemsWithUsers = () => {
+  const body = [...jsonData.feeds.map((f) => ({...f}))];
+  body.forEach((f) => f.user = jsonData.users.find((u) => u.id === f.creator_user_id))
+  body.forEach((f) => {
+    f.reactions.forEach((r) => r.user = jsonData.users.find((u) => r.user_id === u.id))
+  })
+  return body.sort((a, b) => b.updated_date - a.updated_date);
+}
+
 // Send expired token after "totalRequests" requests
 middlewares.push((req, res, next) => {
   totalRequests--;
@@ -73,12 +82,7 @@ middlewares.push((req, res, next) => {
 
 middlewares.push((req, res, next) => {
   if (req.method === 'GET' && req.originalUrl === '/feeds') {
-    const body = [...jsonData.feeds.map((f) => ({...f}))];
-    body.forEach((f) => f.user = jsonData.users.find((u) => u.id === f.creator_user_id))
-    body.forEach((f) => {
-      f.reactions.forEach((r) => r.user = jsonData.users.find((u) => r.user_id === u.id))
-    })
-    res.json(body.sort((a, b) => b.updated_date - a.updated_date));
+    res.json(mapFeedItemsWithUsers());
   } else {
     next();
   }
@@ -118,9 +122,27 @@ middlewares.push((req, res, next) => {
       r.user_id = r.user.id;
     });
     const feedIndex = jsonData.feeds.findIndex((f) => f.id === feed.id);
-    console.log(feed);
     jsonData.feeds[feedIndex] = feed;
     res.json(req.body);
+  } else {
+    next();
+  }
+});
+
+middlewares.push((req, res, next) => {
+  if (req.method === 'DELETE') {
+    const feedId = +req.originalUrl.split('/').reverse()[0];
+    const feedIdsToRemove = jsonData.feeds
+      .filter((f) => f.parent_feed_id === feedId || f.id === feedId)
+      .map((f) => jsonData.feeds.findIndex((f2) => f2.id === f.id));
+    console.log({feedIdsToRemove, feedId});
+    jsonData.feeds = jsonData.feeds.reduce((result, f, index) => {
+      if (feedIdsToRemove.includes(index)) {
+        return result;
+      }
+      return [...result, f];
+    }, []);
+    res.json(mapFeedItemsWithUsers());
   } else {
     next();
   }

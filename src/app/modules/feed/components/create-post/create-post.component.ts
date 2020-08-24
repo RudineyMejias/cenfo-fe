@@ -13,12 +13,22 @@ import { Feed } from '@/shared/models/feed.model';
 })
 export class CreatePostComponent implements OnInit {
 
-  @Input() submitPost: (feed: Feed, modal: NgbActiveModal) => void;
+  @Input() submitPost: (feed: Feed, modal: NgbActiveModal) => void | Promise<void>;
+  @Input() feed: Feed;
 
   formGroup: FormGroup;
 
   get user$(): Observable<User> {
     return this.authenticationService.authenticatedUser$;
+  }
+
+  get isEdit(): boolean {
+    return !!this.feed;
+  }
+
+  get modalTitleWordingKey(): string {
+    const wordingKey = 'FEED.CREATE_POST_MODAL.TITLE.';
+    return this.isEdit ? `${wordingKey}EDIT` : `${wordingKey}CREATE`;
   }
 
   constructor(
@@ -28,21 +38,22 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      text: new FormControl('', [Validators.required]),
-      image_url: new FormControl(''),
+      text: new FormControl(this.feed?.text || '', [Validators.required]),
+      image_url: new FormControl(this.feed?.image_url || ''),
     });
   }
 
-  onSubmit(user: User): void {
+  async onSubmit(user: User): Promise<void> {
     if (this.formGroup.invalid) {
       this.formGroup.markAsDirty();
       return;
     }
     const feed: Feed = {
-      creator_user_id: user.id,
+      ...this.feed,
+      creator_user_id: this.feed?.creator_user_id ? this.feed.creator_user_id : user.id,
       ...this.formGroup.value,
     };
 
-    this.submitPost(feed, this.activeModal);
+    await this.submitPost(feed, this.activeModal);
   }
 }

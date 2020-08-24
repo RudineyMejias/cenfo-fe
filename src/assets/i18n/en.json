@@ -9,6 +9,7 @@
   },
   "FEED": {
     "FEED_ADDED": "New post added",
+    "FEED_REMOVED": "Post removed",
     "REACTIONS": {
       "HAHA": "haha",
       "WOW": "wow",
@@ -20,7 +21,10 @@
       "TITLE": "Recent Notifications"
     },
     "CREATE_POST_MODAL": {
-      "TITLE": "New post",
+      "TITLE": {
+        "CREATE": "New post",
+        "EDIT": "Edit post"
+      },
       "CLOSE": "Close",
       "SUBMIT": "Post",
       "TEXT": "Say something...",

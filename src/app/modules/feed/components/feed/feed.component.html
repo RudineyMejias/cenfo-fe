@@ -7,7 +7,12 @@
   <div class="col-md-6">
     <ng-container *ngFor="let feed of feeds">
       <div class="pb-5">
-        <cf-feed-item (selectReaction)="reactionClick($event)" [feed]="feed"></cf-feed-item>
+        <cf-feed-item
+          [feed]="feed"
+          (selectReaction)="reactionClick($event)"
+          (editPost)="editPost($event)"
+          (removePost)="removePost($event)">
+        </cf-feed-item>
       </div>
     </ng-container>
   </div>

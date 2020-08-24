@@ -1,6 +1,20 @@
+@import "~bootstrap/scss/bootstrap";
+
 .feed-header {
   &__photo {
     max-width: 60px;
     max-height: 60px;
+  }
+
+  &__menu {
+    &:hover, &:focus {
+      box-shadow: none;
+      outline: 0;
+      color: theme-color('danger');
+    }
+
+    &:after {
+      display: none;
+    }
   }
 }

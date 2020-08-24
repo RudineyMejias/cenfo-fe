@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Feed } from '@/shared/models/feed.model';
 
 @Component({
@@ -9,6 +9,8 @@ import { Feed } from '@/shared/models/feed.model';
 })
 export class FeedItemHeaderComponent {
   @Input() feed: Feed;
+  @Output() editPost = new EventEmitter<Feed>();
+  @Output() removePost = new EventEmitter<Feed>();
 
   get fullName(): string {
     return `${this.feed?.user?.name} ${this.feed?.user?.last_name}`;

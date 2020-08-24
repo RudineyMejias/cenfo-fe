@@ -25,4 +25,8 @@ export class FeedService {
   updateFeed(feed: Feed): Observable<Feed> {
     return this.requestService.put(this.basePath, feed);
   }
+
+  deleteFeed(feedId: number): Observable<Feed[]> {
+    return this.requestService.delete<Feed[]>(`${this.basePath}/${feedId}`);
+  }
 }

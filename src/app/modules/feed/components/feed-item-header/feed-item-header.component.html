@@ -1,7 +1,16 @@
-<div class="media feed-header align-items-center">
-  <img src="https://picsum.photos/100/100" class="mr-3 feed-header__photo rounded-circle">
-  <div class="media-body">
-    <h6 class="mb-1">{{fullName}}</h6>
-    <small>{{feed?.created_date | timeAgo}}</small>
+<div class="feed-header d-flex justify-content-between align-items-center">
+  <div class="media align-items-center">
+    <img src="https://picsum.photos/100/100" class="mr-3 feed-header__photo rounded-circle">
+    <div class="media-body">
+      <h6 class="mb-1">{{fullName}}</h6>
+      <small>{{feed?.created_date | timeAgo}}</small>
+    </div>
+  </div>
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn feed-header__menu" ngbDropdownToggle><i class="oi oi-menu"></i></button>
+    <div ngbDropdownMenu>
+      <button ngbDropdownItem (click)="editPost.emit(feed)">Edit post</button>
+      <button ngbDropdownItem (click)="removePost.emit(feed)">Remove post</button>
+    </div>
   </div>
 </div>
