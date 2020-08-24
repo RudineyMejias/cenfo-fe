@@ -19,6 +19,7 @@
             [rows]="1">
           </cf-input>
           <cf-input
+            *ngIf="!feed?.parent_feed_id"
             formControlName="image_url"
             [placeholder]="'FEED.CREATE_POST_MODAL.IMAGE' | translate">
           </cf-input>
@@ -28,6 +29,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-danger" (click)="activeModal.dismiss()">{{'FEED.CREATE_POST_MODAL.CLOSE' | translate}}</button>
-    <button type="button" class="btn btn-danger" (click)="onSubmit(user)">{{'FEED.CREATE_POST_MODAL.SUBMIT' | translate}}</button>
+    <button [disabled]="formGroup.invalid" type="button" class="btn btn-danger" (click)="onSubmit(user)">{{'FEED.CREATE_POST_MODAL.SUBMIT' | translate}}</button>
   </div>
 </ng-container>

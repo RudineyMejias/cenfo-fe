@@ -14,4 +14,11 @@
   &__wrapper {
     text-align: left;
   }
+
+  &__bordered {
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 10px 0px rgba(85, 85, 85, 0.2);
+    background-color: #f1f1f1;
+    border: none;
+  }
 }

@@ -6,11 +6,9 @@
       <small>{{feed?.created_date | timeAgo}}</small>
     </div>
   </div>
-  <div ngbDropdown class="d-inline-block">
-    <button class="btn feed-header__menu" ngbDropdownToggle><i class="oi oi-menu"></i></button>
-    <div ngbDropdownMenu>
-      <button ngbDropdownItem (click)="editPost.emit(feed)">Edit post</button>
-      <button ngbDropdownItem (click)="removePost.emit(feed)">Remove post</button>
-    </div>
-  </div>
+  <cf-feed-menu
+    *ngIf="feed.isEditable"
+    (editPost)="editPost.emit(feed)"
+    (removePost)="removePost.emit(feed)">
+  </cf-feed-menu>
 </div>

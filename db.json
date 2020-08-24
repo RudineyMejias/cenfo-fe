@@ -1,4 +1,21 @@
 {
+  "notifications": [
+    {
+      "user_id": 1,
+      "message": "Added a new post",
+      "created_date": 1595986659005
+    },
+    {
+      "user_id": 1,
+      "message": "Reacted to a post",
+      "created_date": 1595986659005
+    },
+    {
+      "user_id": 1,
+      "message": "Updated a post",
+      "created_date": 1595986659005
+    }
+  ],
   "feeds": [
     {
       "id": 1,

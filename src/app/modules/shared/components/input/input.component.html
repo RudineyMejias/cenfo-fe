@@ -5,9 +5,10 @@
       [placeholder]="placeholder"
       [value]="value"
       class="form-control cf-input"
+      [ngClass]="{'cf-input__bordered': bordered}"
       (input)="onInput($event.target.value)" />
   </ng-container>
-  <div *ngIf="displayErrorMsg" class="invalid-feedback">
+  <div *ngIf="!omitErrorMsg && displayErrorMsg" class="invalid-feedback">
     {{errorMsg | translate}}
   </div>
 </div>

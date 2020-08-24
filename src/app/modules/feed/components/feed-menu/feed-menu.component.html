@@ -1,0 +1,7 @@
+<div ngbDropdown class="d-inline-block">
+  <button class="btn feed-menu__button" ngbDropdownToggle><i class="oi oi-menu"></i></button>
+  <div ngbDropdownMenu>
+    <button ngbDropdownItem (click)="editPost.emit()">{{'FEED.MENU.EDIT' | translate}}</button>
+    <button ngbDropdownItem (click)="removePost.emit()">{{'FEED.MENU.REMOVE' | translate}}</button>
+  </div>
+</div>

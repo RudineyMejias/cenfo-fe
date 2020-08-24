@@ -10,8 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent {
 
-  get isAuthenticated$(): Observable<boolean> {
-    return this.authenticationService.isAuthenticated$;
+  get authUser$(): Observable<boolean> {
+    return this.authenticationService.authenticatedUser$;
   }
 
   constructor(
@@ -21,5 +21,10 @@ export class NavbarComponent {
 
   changeLanguage(lang: string): void {
     this.translateService.setDefaultLang(lang);
+  }
+
+  logout(): void {
+    this.authenticationService.logout();
+    location.href = '/login';
   }
 }

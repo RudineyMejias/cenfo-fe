@@ -16,6 +16,7 @@ export class FeedItemFooterComponent {
   @Input() numberOfComments: number;
   @Input() reactions: Reaction[];
   @Output() selectReaction = new EventEmitter<string>();
+  @Output() commentsClick = new EventEmitter<void>();
 
   get reactionIcons(): string[] {
     return this.reactions.map(r => `/assets/images/${r.reaction_type}.png`)

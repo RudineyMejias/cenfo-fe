@@ -1,36 +1,46 @@
-<nav class="cf-navbar sticky-top navbar navbar-expand-lg navbar-light bg-light">
-  <ng-container *ngIf="!(isAuthenticated$ | async)">
-    <a class="navbar-brand" href="#">
-      <img src="/assets/images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
-    </a>
-    <h3>CENFO-PJ</h3>
-    <button class="navbar-toggler" type="button">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </ng-container>
-  <div class="collapse navbar-collapse cf-navbar__options">
-    <ng-container *ngIf="isAuthenticated$ | async">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">{{'NAVBAR.HOME' | translate}} <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-      <img src="/assets/images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
-    </ng-container>
-  </div>
-  <div *ngIf="!(isAuthenticated$ | async)" class="navbar-nav cf-navbar__banner">
-    {{'NAVBAR.BANNER' | translate}}
-  </div>
-  <div *ngIf="isAuthenticated$ | async" class="navbar-nav w-50 d-flex justify-content-end">
-    <div class="d-inline-block" ngbDropdown #languageDropdown="ngbDropdown">
-      <button class="btn nav-link d-flex align-items-center" ngbDropdownAnchor (focus)="languageDropdown.open()">
-        <i class="bi bi-globe2 mr-1"></i>
-        <span>Language</span>
+<ng-container *cfBindingContext="let user be (authUser$ | async)">
+  <nav class="cf-navbar sticky-top navbar navbar-expand-lg navbar-light bg-light">
+    <ng-container *ngIf="!user">
+      <a class="navbar-brand" href="#">
+        <img src="/assets/images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
+      </a>
+      <h3>CENFO-PJ</h3>
+      <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownManual">
-        <button (click)="changeLanguage('en')" ngbDropdownItem>{{'NAVBAR.LANGUAGES.EN' | translate}}</button>
-        <button (click)="changeLanguage('es')" ngbDropdownItem>{{'NAVBAR.LANGUAGES.ES' | translate}}</button>
+    </ng-container>
+    <div class="collapse navbar-collapse cf-navbar__options">
+      <ng-container>
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngIf="user">
+            <a class="nav-link active" href="#">{{'NAVBAR.HOME' | translate}} <span class="sr-only">(current)</span></a>
+          </li>
+          <div class="d-inline-block" ngbDropdown #languageDropdown="ngbDropdown" display="dynamic" placement="bottom-right">
+            <button class="btn nav-link d-flex align-items-center" ngbDropdownAnchor (focus)="languageDropdown.open()">
+              <i class="bi bi-globe2 mr-1"></i>
+              <span>{{'NAVBAR.LANGUAGE' | translate}}</span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+              <button (click)="changeLanguage('en')" ngbDropdownItem>{{'NAVBAR.LANGUAGES.EN' | translate}}</button>
+              <button (click)="changeLanguage('es')" ngbDropdownItem>{{'NAVBAR.LANGUAGES.ES' | translate}}</button>
+            </div>
+          </div>
+        </ul>
+        <img src="/assets/images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
+      </ng-container>
+    </div>
+    <div *ngIf="!user" class="navbar-nav cf-navbar__banner">
+      {{'NAVBAR.BANNER' | translate}}
+    </div>
+    <div *ngIf="user" class="navbar-nav w-50 d-flex justify-content-end">
+      <div class="d-inline-block" ngbDropdown #profileDropdown="ngbDropdown" display="dynamic" placement="bottom-right">
+        <button class="btn nav-link__image d-flex align-items-center" ngbDropdownAnchor (focus)="profileDropdown.open()">
+          <img [src]="user.photo_url" class="rounded-circle" width="37" height="37" />
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+          <button (click)="logout()" ngbDropdownItem>{{'NAVBAR.PROFILE.LOGOUT' | translate}}</button>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</ng-container>

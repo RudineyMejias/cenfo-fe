@@ -10,6 +10,8 @@ export class InputComponent implements ControlValueAccessor {
   @Input() placeholder: string;
   @Input() type = 'text';
   @Input() multiline = false;
+  @Input() bordered = false;
+  @Input() omitErrorMsg = false;
   @Input() rows = 3;
   value: string;
   isDisabled: boolean;

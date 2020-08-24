@@ -2,14 +2,25 @@
   "NAVBAR": {
     "BANNER": "It helps you to connect and share with the people in your life",
     "HOME": "Home",
+    "LANGUAGE": "Language",
     "LANGUAGES": {
       "EN": "English",
       "ES": "Spanish"
+    },
+    "PROFILE": {
+      "LOGOUT": "Logout"
     }
   },
   "FEED": {
     "FEED_ADDED": "New post added",
     "FEED_REMOVED": "Post removed",
+    "MENU": {
+      "EDIT": "Edit",
+      "REMOVE": "Remove"
+    },
+    "COMMENT": {
+      "INPUT_PLACEHOLDER": "Write a comment..."
+    },
     "REACTIONS": {
       "HAHA": "haha",
       "WOW": "wow",

@@ -1,0 +1,21 @@
+.feed-comment-input {
+  width: 100%;
+
+  &__photo,
+  &__button {
+    width: 2.4em;
+    height: 2.4em;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4em;
+  }
+
+  &__icon {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+}

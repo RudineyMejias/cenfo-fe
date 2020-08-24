@@ -17,11 +17,13 @@ const validEmails = jsonData.users.map((user) => user.email);
 
 const messages = {
   en: {
+    USER_DUPLICATE: 'A user with same email address already exists',
     INVALID: 'Invalid credentials',
     UNAUTHORIZED: 'The user is not logged in',
     EXPIRED: 'The session has expired',
   },
   es: {
+    USER_DUPLICATE: 'Ya existe un usuario con el mismo correo electronico',
     INVALID: 'Credenciales invalidos',
     UNAUTHORIZED: 'El usuario no esta autenticado',
     EXPIRED: 'La sesion del usuario ha expirado',
@@ -41,7 +43,7 @@ const mapFeedItemsWithUsers = () => {
 middlewares.push((req, res, next) => {
   totalRequests--;
   if (totalRequests === 0) {
-    totalRequests = 100;
+    totalRequests = 50;
     return res.status(401).send({
       message: messages[req.headers.lang || 'en'].EXPIRED,
     });
@@ -52,7 +54,7 @@ middlewares.push((req, res, next) => {
 
 // Send unauthorized if the authorization header is not present
 middlewares.push((req, res, next) => {
-  if (req.originalUrl !== '/login' && !req.headers.authorization) {
+  if (req.originalUrl !== '/login' && req.originalUrl !== '/users' && !req.headers.authorization) {
     return res.status(401).send({
       message: messages[req.headers.lang || 'en'].UNAUTHORIZED,
     });
@@ -71,10 +73,20 @@ middlewares.push((req, res, next) => {
       }
       res.json(response);
     } else {
-      return res.status(401).send({
+      return res.status(500).send({
         message: messages[req.headers.lang || 'en'].INVALID,
       });
     }
+  } else {
+    next();
+  }
+});
+
+middlewares.push((req, res, next) => {
+  if (req.method === 'GET' && req.originalUrl === '/feeds/notifications') {
+    const notifications = jsonData.notifications.reverse().slice(0, 6);
+    notifications.forEach(n => n.user = jsonData.users.find(u => u.id === n.user_id));
+    res.json(notifications);
   } else {
     next();
   }
@@ -91,8 +103,13 @@ middlewares.push((req, res, next) => {
 middlewares.push((req, res, next) => {
   if (req.method === 'POST' && req.originalUrl === '/users') {
     const user = {...req.body};
+    if (jsonData.users.find(u => u.email === user.email)) {
+      res.send(500, { message: messages[req.headers.lang || 'en'].USER_DUPLICATE });
+    }
     user.id = getNextId(jsonData.users);
-    user.photo_url = 'https://picsum.photos/200/200?grayscale',
+    user.review = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+    user.cover_url = 'https://picsum.photos/800/400';
+    user.photo_url = 'https://picsum.photos/200/200?grayscale';
     jsonData.users.push(user);
     res.json({user, token: 'authorization.token'});
   } else {
@@ -103,13 +120,14 @@ middlewares.push((req, res, next) => {
 middlewares.push((req, res, next) => {
   if (req.method === 'POST' && req.originalUrl === '/feeds') {
     const feed = {...req.body};
+    jsonData.notifications.push({created_date: Date.now(), user_id: feed.creator_user_id, message: feed.parent_feed_id ? 'New comment added' : 'New post added'});
     feed.id = getNextId(jsonData.feeds);
     feed.user = jsonData.users.find((u) => u.id === feed.creator_user_id);
     feed.created_date = Date.now();
     feed.updated_date = Date.now();
     feed.reactions = [];
     jsonData.feeds.push(feed);
-    res.json(feed);
+    res.json(mapFeedItemsWithUsers());
   } else {
     next();
   }
@@ -118,12 +136,13 @@ middlewares.push((req, res, next) => {
 middlewares.push((req, res, next) => {
   if (req.method === 'PUT' && req.originalUrl === '/feeds') {
     const feed = {...req.body};
+    jsonData.notifications.push({created_date: Date.now(), user_id: feed.creator_user_id, message: feed.parent_feed_id ? 'Comment updated' : 'Comment added'});
     feed.reactions.forEach((r) => {
       r.user_id = r.user.id;
     });
     const feedIndex = jsonData.feeds.findIndex((f) => f.id === feed.id);
     jsonData.feeds[feedIndex] = feed;
-    res.json(req.body);
+    res.json(mapFeedItemsWithUsers());
   } else {
     next();
   }
@@ -135,7 +154,6 @@ middlewares.push((req, res, next) => {
     const feedIdsToRemove = jsonData.feeds
       .filter((f) => f.parent_feed_id === feedId || f.id === feedId)
       .map((f) => jsonData.feeds.findIndex((f2) => f2.id === f.id));
-    console.log({feedIdsToRemove, feedId});
     jsonData.feeds = jsonData.feeds.reduce((result, f, index) => {
       if (feedIdsToRemove.includes(index)) {
         return result;
@@ -143,17 +161,6 @@ middlewares.push((req, res, next) => {
       return [...result, f];
     }, []);
     res.json(mapFeedItemsWithUsers());
-  } else {
-    next();
-  }
-});
-
-middlewares.push((req, res, next) => {
-  if (req.method === 'PUT' && req.originalUrl === '/feeds') {
-    re.body.updated_date = Date.now();
-    const feedIndex = jsonData.feeds.findIndex(f => f.id === req.body.id);
-    jsonData.feeds[feedIndex] = {...req.body};
-    res.json(jsonData.feeds[feedIndex]);
   } else {
     next();
   }

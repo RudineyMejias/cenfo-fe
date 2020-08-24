@@ -1,0 +1,16 @@
+<ng-container *cfBindingContext="let user be (user$ | async)">
+  <form [formGroup]="formGroup" (ngSubmit)="postComment()" class="d-flex align-items-start feed-comment-input">
+    <img [src]="user.photo_url" class="rounded-circle feed-comment-input__photo mr-3">
+    <cf-input
+      class="flex-grow-1"
+      [bordered]="true"
+      [omitErrorMsg]="true"
+      type="text"
+      [placeholder]="'FEED.COMMENT.INPUT_PLACEHOLDER' | translate"
+      formControlName="text">
+    </cf-input>
+    <button [disabled]="formGroup.invalid" type="submit" class="ml-3 rounded-circle btn btn-danger feed-comment-input__button">
+      <i class="bi bi-paper-plane feed-comment-input__icon"></i>
+    </button>
+  </form>
+</ng-container>

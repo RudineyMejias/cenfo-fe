@@ -2,28 +2,13 @@
   <div class="card-body">
     <h5 class="recent-notifications__title">{{'FEED.RECENT_NOTIFICATIONS.TITLE' | translate | json}}</h5>
 
-    <div class="media mb-4">
-      <img src="https://picsum.photos/45/45" class="mr-3 rounded-circle recent-notifications__image">
+    <div class="media mb-4" *ngFor="let notification of notifications">
+      <img [src]="notification.user.photo_url" class="mr-3 rounded-circle recent-notifications__image">
       <div class="media-body">
-        <h6 class="mt-0">Any one can join with us</h6>
-        <small class="card-text">5 minutes ago</small>
+        <h6 class="mt-0">{{notification.message}}</h6>
+        <small class="card-text">{{notification.created_date | timeAgo}}</small>
       </div>
     </div>
 
-    <div class="media mb-4">
-      <img src="https://picsum.photos/45/45" class="mr-3 rounded-circle recent-notifications__image">
-      <div class="media-body">
-        <h6 class="mt-0">Any one can join with us</h6>
-        <small class="card-text">5 minutes ago</small>
-      </div>
-    </div>
-
-    <div class="media mb-4">
-      <img src="https://picsum.photos/45/45" class="mr-3 rounded-circle recent-notifications__image">
-      <div class="media-body">
-        <h6 class="mt-0">Any one can join with us</h6>
-        <small class="card-text">5 minutes ago</small>
-      </div>
-    </div>
   </div>
 </div>

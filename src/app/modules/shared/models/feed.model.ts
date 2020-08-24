@@ -12,4 +12,5 @@ export interface Feed {
   reactions?: Reaction[];
   user?: User;
   comments?: Feed[];
+  isEditable?: boolean;
 }

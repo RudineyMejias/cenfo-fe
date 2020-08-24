@@ -3,9 +3,9 @@ import { RequestService } from '@/core/services/request.service';
 import { Credentials } from '@/shared/models/credentials.model';
 import { User } from '@/shared/models/user.model';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { LocalStorageKeys } from '@/shared/constants/local-storage-keys.constant';
-import { Router } from '@angular/router';
+import { Authorization } from '@/shared/models/authorization.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +28,19 @@ export class AuthenticationService {
   constructor(private readonly requestService: RequestService) { }
 
   login(credentials: Credentials): Observable<void> {
-    return this.requestService.post<{ token: string, user: User }>('/login', credentials)
-      .pipe(map((data) => {
-        localStorage.setItem(LocalStorageKeys.AUTH, JSON.stringify(data));
-        this.isAuthenticatedSubject.next(true);
-      }));
+    return this.requestService.post<Authorization>('/login', credentials)
+      .pipe(map((data) => this.saveUserSession(data)));
   }
 
   logout(): void {
     localStorage.removeItem(LocalStorageKeys.AUTH);
     this.isAuthenticatedSubject.next(false);
     this.authenticatedUserSubject.next(undefined);
+  }
+
+  saveUserSession(session: Authorization): void {
+    localStorage.setItem(LocalStorageKeys.AUTH, JSON.stringify(session));
+    this.isAuthenticatedSubject.next(true);
+    this.authenticatedUserSubject.next(session.user);
   }
 }

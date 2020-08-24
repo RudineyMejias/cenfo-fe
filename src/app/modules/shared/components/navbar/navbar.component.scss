@@ -34,7 +34,14 @@
     color: $color-mine-shaft;
     font-weight: 700;
     padding: 1.5em 1.5em;
+  }
 
+  & .navbar-nav .nav-link__image {
+    padding: 1em 1em;
+  }
+  
+  & .navbar-nav .nav-link,
+  & .navbar-nav .nav-link__image {
     & i {
       font-size: 1.3em;
     }

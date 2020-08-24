@@ -1,0 +1,14 @@
+<div class="feed-item-comment d-flex justify-content-between">
+  <div class="d-flex">
+    <img [src]="comment.user.photo_url" class="feed-item-comment__photo rounded-circle img-fluid mr-2">
+    <div>
+      <h6 class="mb-1">{{comment.user.name}} {{comment.user.last_name}} <small class="ml-1">{{comment.created_date | timeAgo}}</small></h6>
+      <small>{{comment.text}}</small>
+    </div>
+  </div>
+  <cf-feed-menu
+    *ngIf="comment.isEditable"
+    (editPost)="update.emit(comment)"
+    (removePost)="remove.emit(comment)">
+  </cf-feed-menu>
+</div>

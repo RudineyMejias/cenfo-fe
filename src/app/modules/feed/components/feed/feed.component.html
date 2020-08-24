@@ -9,6 +9,7 @@
       <div class="pb-5">
         <cf-feed-item
           [feed]="feed"
+          (postComment)="saveNewPost($event)"
           (selectReaction)="reactionClick($event)"
           (editPost)="editPost($event)"
           (removePost)="removePost($event)">
@@ -17,10 +18,10 @@
     </ng-container>
   </div>
   <div class="col-md-3">
-    <cf-recent-nofitications></cf-recent-nofitications>
+    <cf-recent-nofitications [notifications]="notifications"></cf-recent-nofitications>
   </div>
 </div>
-<!-- <cf-create-post></cf-create-post> -->
+
 <button class="btn btn-danger cf-feed__add-post" (click)="openPostModal()">
   <svg viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>

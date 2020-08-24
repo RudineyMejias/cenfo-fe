@@ -2,14 +2,25 @@
   "NAVBAR": {
     "BANNER": "Te ayuda a conectarte y compartir con personas en tu vida",
     "HOME": "Inicio",
+    "LANGUAGE": "Idioma",
     "LANGUAGES": {
       "EN": "Inglés",
       "ES": "Español"
+    },
+    "PROFILE": {
+      "LOGOUT": "Cerrar sesion"
     }
   },
   "FEED": {
     "FEED_ADDED": "Nuevo post agregado",
     "FEED_REMOVED": "Post borrado",
+    "MENU": {
+      "EDIT": "Editar",
+      "REMOVE": "Eliminar"
+    },
+    "COMMENT": {
+      "INPUT_PLACEHOLDER": "Escribe un comentario..."
+    },
     "REACTIONS": {
       "HAHA": "jaja",
       "WOW": "wow",

@@ -2,7 +2,7 @@
 <div class="jumbotron signup-form__card">
   <h4 class="signup-form__card-header">{{'AUTH.SIGNUP.WELCOME' | translate}}</h4>
   <div class="signup-form__card-content">
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit($event)">
       <cf-input [placeholder]="'AUTH.SIGNUP.FIRST_NAME' | translate" type="text" formControlName="name"></cf-input>
       <cf-input [placeholder]="'AUTH.SIGNUP.LAST_NAME' | translate" type="text" formControlName="lastName"></cf-input>
       <cf-input [placeholder]="'AUTH.SIGNUP.EMAIL' | translate" type="email" formControlName="email"></cf-input>

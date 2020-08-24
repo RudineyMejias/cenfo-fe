@@ -15,11 +15,19 @@
         [reactions]="feed.reactions"
         [numberOfComments]="feed.comments?.length"
         (selectReaction)="changeReaction($event)"
+        (commentsClick)="commentsClick()"
       ></cf-feed-item-footer>
     </div>
 
-    <!-- <div class="feed-item__comments pt-4">
-      <cf-feed-item-comments></cf-feed-item-comments>
-    </div> -->
+    <div *ngIf="displayComments" class="feed-item__comments pt-4">
+      <cf-feed-comment-input (post)="addComment($event, feed)"></cf-feed-comment-input>
+      <div *ngFor="let comment of feed.comments" class="mb-4">
+        <cf-feed-item-comment
+          [comment]="comment"
+          (update)="editPost.emit(comment)"
+          (remove)="removePost.emit(comment)">
+        </cf-feed-item-comment>
+      </div>
+    </div>
   </div>
 </div>

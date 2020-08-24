@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+
+.feed-menu {
+  &__button {
+    &:hover, &:focus {
+      box-shadow: none;
+      outline: 0;
+      color: theme-color('danger');
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+}

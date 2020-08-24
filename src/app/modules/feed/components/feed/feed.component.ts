@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FeedService } from '@/feed/services/feed.service';
 import { Feed } from '@/shared/models/feed.model';
 import { ToastrService } from 'ngx-toastr';
@@ -10,16 +10,18 @@ import { AuthenticationService } from '../../../core/services/authentication.ser
 import { take } from 'rxjs/operators';
 import { Reaction } from '@/modules/shared/models/reaction.model';
 import { TranslateService } from '@ngx-translate/core';
+import { Notification } from '@/shared/models/notification.model';
 
 @Component({
   selector: 'cf-feed',
   templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss']
+  styleUrls: ['./feed.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeedComponent implements OnInit {
 
   public feeds: Feed[];
-  public users: User[];
+  public notifications: Notification[];
   private authenticatedUser: User;
 
   constructor(
@@ -28,7 +30,8 @@ export class FeedComponent implements OnInit {
     private readonly toastrService: ToastrService,
     private readonly modalService: NgbModal,
     private readonly translateService: TranslateService,
-    private readonly authenticationService: AuthenticationService
+    private readonly authenticationService: AuthenticationService,
+    private readonly ref: ChangeDetectorRef
   ) {
     this.saveNewPost = this.saveNewPost.bind(this);
     this.updateFeed = this.updateFeed.bind(this);
@@ -37,17 +40,25 @@ export class FeedComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.authenticationService.authenticatedUser$.pipe(take(1))
       .subscribe((u) => this.authenticatedUser = u);
-    this.loadFeedItems();
+    await this.getNotifications();
+    await this.loadFeedItems();
+  }
+
+  async getNotifications(): Promise<void> {
+    this.loadingService.startLoading();
+    try {
+      this.notifications = await this.feedService.getRecentNotifications().toPromise();
+    } catch (e) {
+      this.toastrService.error(e?.error?.message);
+    }
+    this.loadingService.stopLoading();
   }
 
   async loadFeedItems(): Promise<void> {
     this.loadingService.startLoading();
     try {
       const feeds: Feed[] = await this.feedService.getFeedItems().toPromise();
-      feeds.forEach((feed) => {
-        feed.comments = feeds.filter(f => f.parent_feed_id === feed.id);
-      });
-      this.feeds = feeds.filter(f => !f.parent_feed_id);
+      this.mapFeedItems(feeds);
     } catch (e) {
       this.toastrService.error(e?.error?.message);
     }
@@ -74,9 +85,8 @@ export class FeedComponent implements OnInit {
   async updateFeed(feed: Feed, modal?: NgbActiveModal): Promise<void> {
     this.loadingService.startLoading();
     try {
-      const feedIndex = this.feeds.findIndex((f) => f.id === feed.id);
-      const updatedFeed = await this.feedService.updateFeed(feed).toPromise();
-      this.feeds[feedIndex] = updatedFeed;
+      const feeds = await this.feedService.updateFeed(feed).toPromise();
+      this.mapFeedItems(feeds);
       modal?.dismiss();
     } catch (e) {
       this.toastrService.error(e?.error?.message);
@@ -84,12 +94,12 @@ export class FeedComponent implements OnInit {
     this.loadingService.stopLoading();
   }
 
-  async saveNewPost(feed: Feed, modal: NgbActiveModal): Promise<void> {
+  async saveNewPost(feed: Feed, modal?: NgbActiveModal): Promise<void> {
     this.loadingService.startLoading();
     try {
-      const newFeed = await this.feedService.addFeed(feed).toPromise();
-      this.feeds = [newFeed].concat(this.feeds);
-      modal.dismiss();
+      const feeds = await this.feedService.addFeed(feed).toPromise();
+      this.mapFeedItems(feeds);
+      modal?.dismiss();
       const successMessage = await this.translateService.get('FEED.FEED_ADDED').toPromise();
       this.toastrService.info(successMessage);
     } catch (e) {
@@ -101,7 +111,8 @@ export class FeedComponent implements OnInit {
   async removePost(feed: Feed): Promise<void> {
     this.loadingService.startLoading();
     try {
-      this.feeds = await this.feedService.deleteFeed(feed.id).toPromise();
+      const feeds = await this.feedService.deleteFeed(feed.id).toPromise();
+      this.mapFeedItems(feeds);
       const successMessage = await this.translateService.get('FEED.FEED_REMOVED').toPromise();
       this.toastrService.info(successMessage);
     } catch (e) {
@@ -119,5 +130,14 @@ export class FeedComponent implements OnInit {
   openPostModal(): void {
     const modalRef = this.modalService.open(CreatePostComponent);
     modalRef.componentInstance.submitPost = this.saveNewPost;
+  }
+
+  private mapFeedItems(feeds: Feed[]): void {
+    feeds.forEach((feed) => {
+      feed.isEditable = this.authenticatedUser.id === feed.user.id;
+      feed.comments = feeds.filter(f => f.parent_feed_id === feed.id);
+    });
+    this.feeds = feeds.filter(f => !f.parent_feed_id);
+    this.ref.detectChanges();
   }
 }
