@@ -125,9 +125,10 @@ middlewares.push((req, res, next) => {
     feed.user = jsonData.users.find((u) => u.id === feed.creator_user_id);
     feed.created_date = Date.now();
     feed.updated_date = Date.now();
+    feed.comments = [];
     feed.reactions = [];
     jsonData.feeds.push(feed);
-    res.json(mapFeedItemsWithUsers());
+    res.json(mapFeedItemsWithUsers([feed])[0]);
   } else {
     next();
   }
@@ -142,7 +143,7 @@ middlewares.push((req, res, next) => {
     });
     const feedIndex = jsonData.feeds.findIndex((f) => f.id === feed.id);
     jsonData.feeds[feedIndex] = feed;
-    res.json(mapFeedItemsWithUsers());
+    res.json(feed);
   } else {
     next();
   }
@@ -160,7 +161,7 @@ middlewares.push((req, res, next) => {
       }
       return [...result, f];
     }, []);
-    res.json(mapFeedItemsWithUsers());
+    res.json({});
   } else {
     next();
   }

@@ -85,9 +85,18 @@ export class FeedComponent implements OnInit {
   async updateFeed(feed: Feed, modal?: NgbActiveModal): Promise<void> {
     this.loadingService.startLoading();
     try {
-      const feeds = await this.feedService.updateFeed(feed).toPromise();
-      this.mapFeedItems(feeds);
+      const feedUpdated = await this.feedService.updateFeed(feed).toPromise();
+      if (feedUpdated.parent_feed_id) {
+        feedUpdated.isEditable = true;
+        const parentFeed = this.feeds.find((f) => f.id === feedUpdated.parent_feed_id);
+        const commentIndex = parentFeed.comments.findIndex(f => f.id === feedUpdated.id);
+        parentFeed.comments[commentIndex] = feedUpdated;
+      } else {
+        const feedIndex = this.feeds.findIndex(f => f.id === feedUpdated.id);
+        this.feeds[feedIndex] = feedUpdated;
+      }
       modal?.dismiss();
+      this.ref.detectChanges();
     } catch (e) {
       this.toastrService.error(e?.error?.message);
     }
@@ -97,9 +106,16 @@ export class FeedComponent implements OnInit {
   async saveNewPost(feed: Feed, modal?: NgbActiveModal): Promise<void> {
     this.loadingService.startLoading();
     try {
-      const feeds = await this.feedService.addFeed(feed).toPromise();
-      this.mapFeedItems(feeds);
+      const feedAdded = await this.feedService.addFeed(feed).toPromise();
+      feedAdded.isEditable = true;
+      if (feedAdded.parent_feed_id) {
+        const feedUpdated = this.feeds.find((f) => f.id === feedAdded.parent_feed_id);
+        feedUpdated.comments = [feedAdded].concat(feedUpdated.comments);
+      } else {
+        this.feeds = [feedAdded].concat(this.feeds);
+      }
       modal?.dismiss();
+      this.ref.detectChanges();
       const successMessage = await this.translateService.get('FEED.FEED_ADDED').toPromise();
       this.toastrService.info(successMessage);
     } catch (e) {
@@ -111,8 +127,16 @@ export class FeedComponent implements OnInit {
   async removePost(feed: Feed): Promise<void> {
     this.loadingService.startLoading();
     try {
-      const feeds = await this.feedService.deleteFeed(feed.id).toPromise();
-      this.mapFeedItems(feeds);
+      await this.feedService.deleteFeed(feed.id).toPromise();
+      if (feed.parent_feed_id) {
+        const parentFeed = this.feeds.find(f => f.id === feed.parent_feed_id);
+        const deleteCommentIndex = parentFeed.comments.findIndex(f => f.id === feed.id);
+        parentFeed.comments.splice(deleteCommentIndex, 1);
+      } else {
+        const deletedFeedIndex = this.feeds.findIndex(f => f.id === feed.id);
+        this.feeds.splice(deletedFeedIndex, 1);
+      }
+      this.ref.detectChanges();
       const successMessage = await this.translateService.get('FEED.FEED_REMOVED').toPromise();
       this.toastrService.info(successMessage);
     } catch (e) {

@@ -32,5 +32,6 @@ export class FeedCommentInputComponent implements OnInit {
 
   postComment(): void {
     this.post.emit(this.formGroup.value.text);
+    this.formGroup.reset();
   }
 }

@@ -26,7 +26,7 @@
             </div>
           </div>
         </ul>
-        <img src="/assets/images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
+        <img *ngIf="user" src="/assets/images/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
       </ng-container>
     </div>
     <div *ngIf="!user" class="navbar-nav cf-navbar__banner">

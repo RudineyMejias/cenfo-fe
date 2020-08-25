@@ -15,16 +15,16 @@ export class FeedService {
     return this.requestService.get<Feed[]>(this.basePath);
   }
 
-  addFeed(feed: Feed): Observable<Feed[]> {
+  addFeed(feed: Feed): Observable<Feed> {
     return this.requestService.post(this.basePath, feed);
   }
 
-  updateFeed(feed: Feed): Observable<Feed[]> {
+  updateFeed(feed: Feed): Observable<Feed> {
     return this.requestService.put(this.basePath, feed);
   }
 
-  deleteFeed(feedId: number): Observable<Feed[]> {
-    return this.requestService.delete<Feed[]>(`${this.basePath}/${feedId}`);
+  deleteFeed(feedId: number): Observable<void> {
+    return this.requestService.delete(`${this.basePath}/${feedId}`);
   }
 
   getRecentNotifications(): Observable<Notification[]> {

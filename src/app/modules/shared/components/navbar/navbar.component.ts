@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '@/core/services/authentication.service';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { User } from '@/shared/models/user.model';
 
 @Component({
   selector: 'cf-navbar',
@@ -10,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent {
 
-  get authUser$(): Observable<boolean> {
+  get authUser$(): Observable<User> {
     return this.authenticationService.authenticatedUser$;
   }
 
