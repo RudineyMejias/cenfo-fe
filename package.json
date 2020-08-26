@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run start:db & ng serve",
     "start:db": "node db-server.js",
     "build": "ng build",
     "test": "ng test",
