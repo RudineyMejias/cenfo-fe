@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, OnInit } from '@angular/core';
 import { Reaction } from '@/modules/shared/models/reaction.model';
 import { Reactions } from '@/modules/shared/constants';
 
@@ -8,12 +8,14 @@ import { Reactions } from '@/modules/shared/constants';
   styleUrls: ['./reaction-select.component.scss', '/src/styles/_feed-actions.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReactionSelectComponent {
+export class ReactionSelectComponent implements OnInit {
   @Input() selectedReaction: Reaction;
   @Output() selectReaction = new EventEmitter<string>();
 
-  get reactionTypes(): { type: string, url: string, display: string }[] {
-    return Object.values(Reactions).map((r) => 
+  reactionTypes: { type: string, url: string, display: string }[];
+
+  ngOnInit(): void {
+    this.reactionTypes = Object.values(Reactions).map((r) =>
       ({ url: `/assets/images/${r}.png`, display: this.getWordingKey(r), type: r })
     );
   }
